@@ -1,4 +1,5 @@
 abstract class Animal {
+
     private int energy;
     private int health;
     private Point position;
@@ -38,13 +39,12 @@ abstract class Animal {
     public void setDiet(String diet) {
         this.diet = diet;
     }
-
-    // Abstract method for movement
+    //moving
     public abstract void move();
 
-    // Abstract method for reacting to random events
+    //reacting to random events
     public abstract void reactToEvent(String event);
 
-    // Abstract method for interacting with other animals
+    //interacting with other animals
     public abstract void interact(Animal other);
 }

@@ -38,10 +38,8 @@ class Wolf extends Animal {
     @Override
     public void interact(Animal other) {
         if (other instanceof Deer) {
-            // Logic for interaction with a Deer
             setEnergy(getEnergy() + 10);  // Example: Wolf eats the Deer
         } else if (other instanceof Bird) {
-            // Logic for interaction with a Bird
             setEnergy(getEnergy() + 5);  // Example: Wolf scares the Bird away
         }
     }

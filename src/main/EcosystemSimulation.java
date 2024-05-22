@@ -6,8 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 public class EcosystemSimulation extends Observable {
-    private int width;
-    private int height;
+    final int width;
+    final int height;
     private List<Animal> animals;
     private Environment environment;
     private List<String> eventLog;
@@ -24,17 +24,19 @@ public class EcosystemSimulation extends Observable {
 
     public void addAnimal(Animal animal) {
         animals.add(animal);
-//        setChanged(); // Notify observers only if there's a change
+        setChanged(); // Notify observers only if there's a change
         notifyObservers("animalAdded" + animal);
     }
 
     public void removeAnimal(Animal animal) {
         animals.remove(animal);
+        setChanged();
         notifyObservers("animalRemoved" + animal);
     }
 
-    public void addWeatherCondition(Environment condition) {
-        notifyObservers("weatherConditionAdded" + condition);
+    public void addWeatherCondition(WeatherEvent event) {
+        setChanged();
+        notifyObservers("weatherConditionAdded" + event);
     }
     public List<Animal> getAnimals() {
         return animals;
@@ -52,54 +54,71 @@ public class EcosystemSimulation extends Observable {
     private void updateStates() {
         for (Animal animal : animals) {
             animal.move();
+            setChanged();
             notifyObservers("animalMoved" + animal);
         }
-        // Additional state updates for weather conditions can be added here
     }
 
     private void generateRandomEvents() {
+//        int eventType = new Random().nextInt(3);
+//        switch (eventType) {
+//            case 0:
+//                Drought drought = new Drought();
+//                drought.dry(environment);
+//                eventLog.add("Drought affected water level: -" + drought.getStrength());
+//                setChanged();
+//                notifyObservers("drought: " + drought);
+//                break;
+//            case 1:
+//                Rain rain = new Rain();
+//                rain.destroy(environment);
+//                eventLog.add("Rain affected water level: +" + rain.getWater());
+//                setChanged();
+//                notifyObservers("rain: " + rain);
+//                break;
+//            case 2:
+//                Storm storm = new Storm();
+//                storm.place(environment);
+//                eventLog.add("Storm affected light level");
+//                setChanged();
+//                notifyObservers("storm: " + storm);
+//                break;
+//        }
         int eventType = random.nextInt(3);
+        WeatherEvent event;
         switch (eventType) {
             case 0:
-                Drought drought = new Drought(random.nextInt(10) + 1);
-                drought.dry(environment);
-                eventLog.add("Drought affected water level: -" + drought.getStrength());
-                setChanged();
-                notifyObservers("drought: " + drought);
+                event = new Drought();
                 break;
             case 1:
-                int waterAmount = random.nextInt(10) + 1;
-                Rain rain = new Rain(waterAmount);
-                rain.destroy(environment);
-                eventLog.add("Rain affected water level: +" + waterAmount);
-                setChanged();
-                notifyObservers("rain: " + rain);
+                event = new Rain();
                 break;
             case 2:
-                Storm storm = new Storm(random.nextInt(10) + 1);
-                storm.place(environment);
-                eventLog.add("Storm affected light level");
-                setChanged();
-                notifyObservers("storm: " + storm);
+                event = new Storm();
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + eventType);
         }
+        addWeatherCondition(event);
+
+
         for (Animal animal : animals) {
-            switch (eventType) {
-                case 0:
-                    animal.reactToEvent("drought");
-                    break;
-                case 1:
-                    animal.reactToEvent("rain");
-                    break;
-                case 2:
-                    animal.reactToEvent("storm");
-                    break;
-            }
+//            switch (eventType) {
+//                case 0:
+//                    animal.reactToEvent("drought");
+//                    break;
+//                case 1:
+//                    animal.reactToEvent("rain");
+//                    break;
+//                case 2:
+//                    animal.reactToEvent("storm");
+//                    break;
+//            }
+            animal.reactToEvent(event.toString());
             notifyObservers("animalReacted" + animal);
         }
     }
 
-    // Additional methods for the simulation can be added here
     public void printPopulation() {
         System.out.println("Population:");
         for (Animal animal : animals) {
@@ -156,18 +175,14 @@ public class EcosystemSimulation extends Observable {
         Observer consoleObserver = new ConsoleObserver();
         simulation.addObserver(consoleObserver);
 
-        // Dodawanie zwierząt
         simulation.addAnimal(new Wolf(100, 100, new Point(0, 0), "carnivore"));
         simulation.addAnimal(new Deer(100, 100, new Point(10, 10), "herbivore"));
         simulation.addAnimal(new Bird(100, 100, new Point(20, 20), "omnivore"));
 
-        // Uruchomienie symulacji
         simulation.simulate();
 
-        // Wyświetlenie populacji
         simulation.printPopulation();
 
-        // Zapis danych symulacji do pliku CSV
         simulation.saveSimulationDataToCSV("simulation_data.csv");
     }
 }

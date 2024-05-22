@@ -11,38 +11,40 @@ public class EcosystemSimulationTest {
     private Wolf wolf;
     private Deer deer;
     private Bird bird;
-    private Drought drought;
-    private Rain rain;
-    private Storm storm;
 
     @BeforeEach
     public void setUp() {
         simulation = new EcosystemSimulation(100, 100);
-        simulation.addAnimal(new Wolf(100, 100, new Point(0, 0), "carnivore"));
-        simulation.addAnimal(new Deer(100, 100, new Point(10, 10), "herbivore"));
-        simulation.addAnimal(new Bird(100, 100, new Point(20, 20), "omnivore"));
+        wolf = new Wolf(100, 100, new Point(0, 0), "carnivore");
+        deer = new Deer(100, 100, new Point(10, 10), "herbivore");
+        bird = new Bird(100, 100, new Point(20, 20), "omnivore");
+        simulation.addAnimal(wolf);
+        simulation.addAnimal(deer);
+        simulation.addAnimal(bird);
     }
 
     @Test
     public void testAddAnimal() {
-        simulation.addAnimal(wolf);
-        assertTrue(simulation.getAnimals().contains(wolf));
+        Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "carnivore");
+        simulation.addAnimal(newWolf);
+        assertTrue(simulation.getAnimals().contains(newWolf));
     }
 
     @Test
     public void testRemoveAnimal() {
-        simulation.addAnimal(wolf);
         simulation.removeAnimal(wolf);
         assertFalse(simulation.getAnimals().contains(wolf));
     }
 
     @Test
     public void testSimulate() {
-        simulation.addAnimal(wolf);
-        simulation.addWeatherCondition(drought);
         simulation.simulate();
-        assertEquals(95, wolf.getHealth());  // Wolf health decreases by 5 due to drought
+        // Check if states are updated, assuming that move method modifies position
+        assertNotEquals(new Point(0, 0), wolf.getPosition());
+        assertNotEquals(new Point(10, 10), deer.getPosition());
+        assertNotEquals(new Point(20, 20), bird.getPosition());
     }
+
     @Test
     public void testSaveSimulationDataToCSV() {
         String filename = "test_simulation_data.csv";
@@ -62,4 +64,3 @@ public class EcosystemSimulationTest {
         file.delete();  // Clean up
     }
 }
-

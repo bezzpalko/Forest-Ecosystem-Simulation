@@ -37,10 +37,8 @@ class Deer extends Animal {
     @Override
     public void interact(Animal other) {
         if (other instanceof Wolf) {
-            // Logic for interaction with a Wolf
             setHealth(getHealth() - 10);  // Example: Deer gets injured
         } else if (other instanceof Bird) {
-            // Logic for interaction with a Bird
             setEnergy(getEnergy() + 2);  // Example: Bird alerts Deer to danger
         }
     }
