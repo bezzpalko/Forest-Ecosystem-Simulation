@@ -1,3 +1,7 @@
+package ecosystem;
+
+import ecosystem.Animal;
+
 class Bird extends Animal {
     private int wingspan;
 
@@ -37,9 +41,9 @@ class Bird extends Animal {
     @Override
     public void interact(Animal other) {
         if (other instanceof Wolf) {
-            setHealth(getHealth() - 10);  // Example: Bird is scared by Wolf
+            setHealth(getHealth() - 10);  // Example: ecosystem.Bird is scared by Wolf
         } else if (other instanceof Deer) {
-            setEnergy(getEnergy() + 2);  // Example: Bird helps Deer find food
+            setEnergy(getEnergy() + 2);  // Example: ecosystem.Bird helps Deer find food
         }
     }
 }

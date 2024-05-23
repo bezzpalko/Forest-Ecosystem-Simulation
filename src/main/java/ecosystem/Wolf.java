@@ -1,3 +1,10 @@
+package ecosystem;
+
+import ecosystem.Animal;
+import ecosystem.Bird;
+import ecosystem.Deer;
+import ecosystem.Point;
+
 class Wolf extends Animal {
     private boolean isPackLeader;
 
@@ -38,9 +45,9 @@ class Wolf extends Animal {
     @Override
     public void interact(Animal other) {
         if (other instanceof Deer) {
-            setEnergy(getEnergy() + 10);  // Example: Wolf eats the Deer
+            setEnergy(getEnergy() + 10);  // Example: ecosystem.Wolf eats the ecosystem.Deer
         } else if (other instanceof Bird) {
-            setEnergy(getEnergy() + 5);  // Example: Wolf scares the Bird away
+            setEnergy(getEnergy() + 5);  // Example: ecosystem.Wolf scares the ecosystem.Bird away
         }
     }
 }

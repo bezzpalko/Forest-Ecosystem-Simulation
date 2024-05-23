@@ -1,14 +1,14 @@
-//
+package ecosystem;//
 //import java.util.Random;
 //
-//public class Rain {
+//public class ecosystem.Rain {
 //    private int water;
 //    private Random random;
-//    public Rain() {
+//    public ecosystem.Rain() {
 //        this.random = new Random();
 //        this.water = random.nextInt(10) + 1;
 //    }
-//    public void destroy(Environment environment) {
+//    public void destroy(ecosystem.Environment environment) {
 //        environment.applyRain(water);
 //    }
 //    public int getWater() {
@@ -16,9 +16,11 @@
 //    }
 //    @Override
 //    public String toString() {
-//        return "Rain{" + "water=" + water + '}';
+//        return "ecosystem.Rain{" + "water=" + water + '}';
 //    }
 //}
+import ecosystem.Environment;
+
 import java.util.Random;
 
 public class Rain implements WeatherEvent {
@@ -40,6 +42,6 @@ public class Rain implements WeatherEvent {
 
     @Override
     public String toString() {
-        return "Rain{" + "water=" + water + '}';
+        return "ecosystem.Rain{" + "water=" + water + '}';
     }
 }

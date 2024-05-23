@@ -1,15 +1,15 @@
-//import java.util.Random;
+package ecosystem;//import java.util.Random;
 //
-//public class Storm {
+//public class ecosystem.Storm {
 //    private int power;
 //    private Random random;
 //
-//    public Storm() {
+//    public ecosystem.Storm() {
 //        this.random = new Random();
 //        this.power = random.nextInt(10) + 1;
 //    }
 //
-//    public void place(Environment environment) {
+//    public void place(ecosystem.Environment environment) {
 //        environment.applyStorm(power);
 //    }
 //
@@ -18,9 +18,11 @@
 //    }
 //    @Override
 //    public String toString() {
-//        return "Storm{" + "power=" + power + '}';
+//        return "ecosystem.Storm{" + "power=" + power + '}';
 //    }
 //}
+import ecosystem.Environment;
+
 import java.util.Random;
 
 public class Storm implements WeatherEvent {
@@ -42,6 +44,6 @@ public class Storm implements WeatherEvent {
 
     @Override
     public String toString() {
-        return "Storm{" + "power=" + power + '}';
+        return "ecosystem.Storm{" + "power=" + power + '}';
     }
 }

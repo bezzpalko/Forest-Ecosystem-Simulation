@@ -1,3 +1,6 @@
+package ecosystem;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,22 +30,22 @@ public class EcosystemSimulationTest {
     public void testAddAnimal() {
         Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "carnivore");
         simulation.addAnimal(newWolf);
-        assertTrue(simulation.getAnimals().contains(newWolf));
+        Assertions.assertTrue(simulation.getAnimals().contains(newWolf));
     }
 
     @Test
     public void testRemoveAnimal() {
         simulation.removeAnimal(wolf);
-        assertFalse(simulation.getAnimals().contains(wolf));
+        Assertions.assertFalse(simulation.getAnimals().contains(wolf));
     }
 
     @Test
     public void testSimulate() {
         simulation.simulate();
         // Check if states are updated, assuming that move method modifies position
-        assertNotEquals(new Point(0, 0), wolf.getPosition());
-        assertNotEquals(new Point(10, 10), deer.getPosition());
-        assertNotEquals(new Point(20, 20), bird.getPosition());
+        Assertions.assertNotEquals(new Point(0, 0), wolf.getPosition());
+        Assertions.assertNotEquals(new Point(10, 10), deer.getPosition());
+        Assertions.assertNotEquals(new Point(20, 20), bird.getPosition());
     }
 
     @Test
@@ -56,7 +59,7 @@ public class EcosystemSimulationTest {
         try {
             List<String> lines = Files.readAllLines(file.toPath());
             assertFalse(lines.isEmpty(), "CSV file should not be empty");
-            assertEquals("Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers", lines.get(0), "CSV header should be correct");
+            assertEquals("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers", lines.get(0), "CSV header should be correct");
         } catch (IOException e) {
             fail("IOException should not occur");
         }

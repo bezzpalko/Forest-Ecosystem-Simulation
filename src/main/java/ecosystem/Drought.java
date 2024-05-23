@@ -1,10 +1,10 @@
-//
+package ecosystem;//
 //import java.util.Random;
-//public class Drought {
+//public class ecosystem.Drought {
 //    private int strength;
 //    private Random random;
 //
-//    public Drought() {
+//    public ecosystem.Drought() {
 //        this.random = new Random();
 //        this.strength = random.nextInt(10) + 1;
 //    }
@@ -37,6 +37,6 @@ public class Drought implements WeatherEvent {
 
     @Override
     public String toString() {
-        return "Drought{" + "strength=" + strength + '}';
+        return "ecosystem.Drought{" + "strength=" + strength + '}';
     }
 }

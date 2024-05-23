@@ -1,3 +1,5 @@
+package ecosystem;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +51,8 @@ public class EcosystemSimulation extends Observable {
     public void simulate() {
         updateStates();
         generateRandomEvents();
+        setChanged();
+        notifyObservers("Simulation step completed.");
     }
 
     private void updateStates() {
@@ -63,23 +67,23 @@ public class EcosystemSimulation extends Observable {
 //        int eventType = new Random().nextInt(3);
 //        switch (eventType) {
 //            case 0:
-//                Drought drought = new Drought();
+//                ecosystem.Drought drought = new ecosystem.Drought();
 //                drought.dry(environment);
-//                eventLog.add("Drought affected water level: -" + drought.getStrength());
+//                eventLog.add("ecosystem.Drought affected water level: -" + drought.getStrength());
 //                setChanged();
 //                notifyObservers("drought: " + drought);
 //                break;
 //            case 1:
-//                Rain rain = new Rain();
+//                ecosystem.Rain rain = new ecosystem.Rain();
 //                rain.destroy(environment);
-//                eventLog.add("Rain affected water level: +" + rain.getWater());
+//                eventLog.add("ecosystem.Rain affected water level: +" + rain.getWater());
 //                setChanged();
 //                notifyObservers("rain: " + rain);
 //                break;
 //            case 2:
-//                Storm storm = new Storm();
+//                ecosystem.Storm storm = new ecosystem.Storm();
 //                storm.place(environment);
-//                eventLog.add("Storm affected light level");
+//                eventLog.add("ecosystem.Storm affected light level");
 //                setChanged();
 //                notifyObservers("storm: " + storm);
 //                break;
@@ -99,6 +103,8 @@ public class EcosystemSimulation extends Observable {
             default:
                 throw new IllegalStateException("Unexpected value: " + eventType);
         }
+        event.apply(environment);
+        eventLog.add(event.toString());
         addWeatherCondition(event);
 
 
@@ -128,7 +134,7 @@ public class EcosystemSimulation extends Observable {
 
     public void saveSimulationDataToCSV(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
-            writer.append("Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers\n");
+            writer.append("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers\n");
             for (Animal animal : animals) {
                 writer.append(animal.getClass().getSimpleName())
                         .append(',')

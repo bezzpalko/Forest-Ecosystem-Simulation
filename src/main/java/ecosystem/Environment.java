@@ -1,3 +1,5 @@
+package ecosystem;
+
 class Environment {
     private int waterLevel;
     private int lightLevel;

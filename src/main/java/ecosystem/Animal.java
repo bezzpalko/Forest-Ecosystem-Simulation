@@ -1,3 +1,5 @@
+package ecosystem;
+
 abstract class Animal {
 
     private int energy;

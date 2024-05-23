@@ -1,3 +1,8 @@
+package ecosystem;
+
+import ecosystem.Animal;
+import ecosystem.Bird;
+
 class Deer extends Animal {
     private boolean hasAntlers;
 
@@ -16,7 +21,7 @@ class Deer extends Animal {
 
     @Override
     public void move() {
-        getPosition().translate(5, 0);  // Deer move 5 units
+        getPosition().translate(5, 0);  // ecosystem.Deer move 5 units
     }
 
     @Override
@@ -37,9 +42,9 @@ class Deer extends Animal {
     @Override
     public void interact(Animal other) {
         if (other instanceof Wolf) {
-            setHealth(getHealth() - 10);  // Example: Deer gets injured
+            setHealth(getHealth() - 10);  // Example: ecosystem.Deer gets injured
         } else if (other instanceof Bird) {
-            setEnergy(getEnergy() + 2);  // Example: Bird alerts Deer to danger
+            setEnergy(getEnergy() + 2);  // Example: ecosystem.Bird alerts ecosystem.Deer to danger
         }
     }
 }

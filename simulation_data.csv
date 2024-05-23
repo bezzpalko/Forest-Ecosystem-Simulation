@@ -1,0 +1,8 @@
+ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers
+Wolf,100,100,carnivore,ecosystem.Point@23fc625e,false
+Deer,100,100,herbivore,ecosystem.Point@3f99bd52,true
+Bird,100,100,omnivore,ecosystem.Point@4f023edb,20
+Environment,WaterLevel,LightLevel
+Environment,100,97
+EventLog
+ecosystem.Storm{power=3}

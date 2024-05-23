@@ -1,3 +1,4 @@
+package ecosystem;
 
 class Point {
     private int x;
