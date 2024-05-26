@@ -23,7 +23,16 @@ class Wolf extends Animal {
 
     @Override
     public void move() {
-        getPosition().translate(3, 3);  // Wolves move 3 units
+        getPosition().translate(2, 2);
+
+        // Ensure x and y are within the bounds of 0 to 50
+        Point position = getPosition();
+        if (position.getX() > 50) {
+            position.setX(0);
+        }
+        if (position.getY() > 50) {
+            position.setY(0);
+        }
     }
 
     @Override

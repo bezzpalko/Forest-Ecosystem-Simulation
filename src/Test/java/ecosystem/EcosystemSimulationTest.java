@@ -18,9 +18,9 @@ public class EcosystemSimulationTest {
     @BeforeEach
     public void setUp() {
         simulation = new EcosystemSimulation(100, 100);
-        wolf = new Wolf(100, 100, new Point(0, 0), "carnivore");
-        deer = new Deer(100, 100, new Point(10, 10), "herbivore");
-        bird = new Bird(100, 100, new Point(20, 20), "omnivore");
+        wolf = new Wolf(100, 100, new Point(0, 0), "miesozerny");
+        deer = new Deer(100, 100, new Point(10, 10), "roslinozerny");
+        bird = new Bird(100, 100, new Point(20, 20), "wszystkozerny");
         simulation.addAnimal(wolf);
         simulation.addAnimal(deer);
         simulation.addAnimal(bird);
@@ -28,7 +28,7 @@ public class EcosystemSimulationTest {
 
     @Test
     public void testAddAnimal() {
-        Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "carnivore");
+        Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "miesozerny");
         simulation.addAnimal(newWolf);
         Assertions.assertTrue(simulation.getAnimals().contains(newWolf));
     }
@@ -54,14 +54,14 @@ public class EcosystemSimulationTest {
         simulation.saveSimulationDataToCSV(filename);
 
         File file = new File(filename);
-        assertTrue(file.exists(), "CSV file should be created");
+        assertTrue(file.exists(), "CSV file powinien byc stworzony");
 
         try {
             List<String> lines = Files.readAllLines(file.toPath());
-            assertFalse(lines.isEmpty(), "CSV file should not be empty");
-            assertEquals("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers", lines.get(0), "CSV header should be correct");
+            assertFalse(lines.isEmpty(), "CSV file nie powinien byc pusty");
+            assertEquals("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers", lines.get(0), "CSV header powinine byc poprawny");
         } catch (IOException e) {
-            fail("IOException should not occur");
+            fail("IOException nie powininen wystapic");
         }
 
         file.delete();  // Clean up

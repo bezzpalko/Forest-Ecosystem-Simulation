@@ -2,6 +2,7 @@ package ecosystem;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.Random;
 public class Menu {
     private EcosystemSimulation simulation;
     private Scanner scanner;
@@ -22,19 +23,19 @@ public class Menu {
                     addAnimal();
                     break;
                 case 2:
-                    removeAnimal();
-                    break;
-                case 3:
                     simulation.generateEvents();
                     break;
+                case 3:
+                    moveAnimals();
+                    break;
                 case 4:
-                    simulation.simulate();
+                    removeAnimal();
                     break;
                 case 5:
-                    simulation.printPopulation();
+                    simulation.simulate();
                     break;
                 case 6:
-                    saveSimulationDataToCSV();
+                    simulation.printPopulation();
                     break;
                 case 7:
                     simulation.printWeatherEvents();
@@ -43,65 +44,70 @@ public class Menu {
                     simulation.printEnvironmentData();
                     break;
                 case 9:
-                    printMenu();
+                    saveSimulationDataToCSV();
                     break;
                 case 10:
-                    System.out.println("Zakończenie programu.");
+                    System.out.println("Zakonczenie programu.");
                     return;
                 default:
-                    System.out.println("Nieprawidłowa opcja.");
+                    System.out.println("Nieprawidlowa opcja.");
             }
         }
     }
 
     private void printMenu() {
         System.out.println("\n--- Menu ---");
-        System.out.println("1. Dodaj zwierzę");
-        System.out.println("2. Usuń zwierzę");
-        System.out.println("3. Wywołaj zdarzenie pogodowe");
-        System.out.println("4. Wykonaj krok symulacji");
-        System.out.println("5. Wyświetl populację");
-        System.out.println("6. Zapisz dane do CSV");
-        System.out.println("7. Wyświetl log zdarzeń");
-        System.out.println("8. Wyświetl dane środowiska");  // Nowa opcja
-        System.out.println("9. Wyświetl menu ponownie");
-        System.out.println("10. Wyjście");
-        System.out.print("Wybierz opcję: ");
+        System.out.println("1. Dodaj zwierze");
+        System.out.println("2. Dodaj dodatkowe zdarzenie pogodowe");
+        System.out.println("3. Dodaj dodatkowy ruch zwierzat");
+        System.out.println("4. Usun zwierze");
+        System.out.println("5. Wykonaj podstawowy krok symulacji (ruch zwierzat i zdarzenie pogodowe");
+        System.out.println("6. Wyswietl populacje");
+        System.out.println("7. Wyswietl liste zdarzen pogodowych");
+        System.out.println("8. Wyswietl dane srodowiska");
+        System.out.println("9. Zapisz dane do CSV");
+        System.out.println("10. Wyjscie z symulacji");
+        System.out.print("Wybierz opcje: ");
     }
 
     private void addAnimal() {
-        System.out.println("Wybierz typ zwierzęcia do dodania:");
+        System.out.println("Wybierz typ zwierzecia:");
         System.out.println("1. Wolf");
         System.out.println("2. Deer");
         System.out.println("3. Bird");
         int choice = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
-        System.out.print("Podaj współrzędne początkowe (x y): ");
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        Random random = new Random();
+        int x = random.nextInt(50);
+        int y = random.nextInt(50);
 
         Animal animal;
         switch (choice) {
             case 1:
-                animal = new Wolf(100, 100, new Point(x, y), "carnivore");
+                animal = new Wolf(40, 30, new Point(x, y), "miesozerny");
                 break;
             case 2:
-                animal = new Deer(100, 100, new Point(x, y), "herbivore");
+                animal = new Deer(50, 40, new Point(x, y), "roslinozerny");
                 break;
             case 3:
-                animal = new Bird(100, 100, new Point(x, y), "omnivore");
+                animal = new Bird(20, 20, new Point(x, y), "wszystkozerny");
                 break;
             default:
-                System.out.println("Nieprawidłowa opcja.");
+                System.out.println("Nieprawidlowa opcja.");
                 return;
         }
         simulation.addAnimal(animal);
     }
+    private void moveAnimals() {
+        for (Animal animal : simulation.getAnimals()) {
+            animal.move();
+        }
+        System.out.println("Zwierzeta wykonaly dodatkowy ruch.");
+    }
 
     private void removeAnimal() {
-        System.out.print("Podaj indeks zwierzęcia do usunięcia: ");
+        System.out.print("Podaj indeks zwierzecia:");
         int index = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
@@ -109,14 +115,14 @@ public class Menu {
 
         if (index >= 0 && index < animalList.size()) {
             Animal animal = animalList.get(index);
-            simulation.removeAnimal(animal); // Usunięcie zwierzęcia z symulacji
-            System.out.println("Zwierzę zostało usunięte.");
+            simulation.removeAnimal(animal);
+            System.out.println("Zwierze zostalo usuniete.");
         } else {
-            System.out.println("Nieprawidłowy indeks.");
+            System.out.println("Nieprawidlowy indeks.");
         }
     }
     private void saveSimulationDataToCSV() {
-        System.out.print("Podaj nazwę pliku do zapisania danych: ");
+        System.out.print("Podaj nazwe pliku do zapisania danych: ");
         String filename = scanner.nextLine();
         simulation.saveSimulationDataToCSV(filename);
         System.out.println("Dane zapisane do pliku " + filename);

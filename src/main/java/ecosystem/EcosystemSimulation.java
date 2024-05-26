@@ -125,7 +125,7 @@ public class EcosystemSimulation extends Observable {
 //        eventLog.add(event.toString());
 //        addWeatherCondition(event);
     public void generateEvents() {
-        System.out.println("Wybierz typ zdarzenia pogodowego do wywołania:");
+        System.out.println("Wybierz typ zdarzenia pogodowego do wywolania:");
         System.out.println("1. Susza (Drought)");
         System.out.println("2. Deszcz (Rain)");
         System.out.println("3. Burza (Storm)");
@@ -144,7 +144,7 @@ public class EcosystemSimulation extends Observable {
                 event = new Storm();
                 break;
             default:
-                System.out.println("Nieprawidłowy wybór, proszę wybrać numer od 1 do 3.");
+                System.out.println("Nieprawidlowy wybor, prosze wybrac numer od 1 do 3.");
                 return; // Zakończenie metody, jeśli wybrano nieprawidłową opcję
         }
 
@@ -153,9 +153,9 @@ public class EcosystemSimulation extends Observable {
 
     public void applyEventToEnvironment(WeatherEvent event) { //już, dodanie zdarzenia do środowiska
         event.apply(environment);
-        weatherEvents.add("Zdarzenie: " + event);
+//        weatherEvents.add("Zdarzenie: " + event);
 
-        String eventDetails = "Event: " + event.getClass().getSimpleName() + " {";
+        String eventDetails = "Zdarzenie: " + event.getClass().getSimpleName() + " {";
         if (event instanceof Drought) {
             eventDetails += "strength=" + ((Drought) event).getStrength();
         } else if (event instanceof Rain) {
@@ -177,7 +177,7 @@ public class EcosystemSimulation extends Observable {
     public void printPopulation() {
         System.out.println("Populacja:");
         if (animals.isEmpty()) {
-            System.out.println("Brak zwierząt.");
+            System.out.println("Brak zwierzat.");
         } else {
             for (Animal animal : animals) {
                 // Pobranie informacji o zwierzęciu i formatowanie wyjścia
@@ -189,13 +189,13 @@ public class EcosystemSimulation extends Observable {
         }
     }
     public void printEnvironmentData() {
-        System.out.println("Dane środowiska:");
+        System.out.println("Dane srodowiska:");
         System.out.println("Poziom wody: " + environment.getWaterLevel());
-        System.out.println("Poziom światła: " + environment.getLightLevel());
+        System.out.println("Poziom swiatla: " + environment.getLightLevel());
     }
     public void printWeatherEvents() {
         if (weatherEvents.isEmpty()) {
-            System.out.println("Brak zapisanych zdarzeń pogodowych.");
+            System.out.println("Brak zapisanych zdarzen pogodowych.");
         } else {
             System.out.println("Dotychczasowe zdarzenia pogodowe:");
             for (String event : weatherEvents) {
@@ -247,7 +247,15 @@ public class EcosystemSimulation extends Observable {
         }
     }
     public static void main(String[] args) {
-        EcosystemSimulation simulation = new EcosystemSimulation(100, 100);
+        System.out.println("Symulacja ekosystemu lesnego: rozne gatunki roslin i zwierzat oddzialuja ze soba. Symulacja bedzie obejmowac srodowisko - plansze o z gory okreslonych wymiarach: 50 x 50.\n" +
+                "Na poczatku symulacji, rozmieszczone zostana gatunki roslin, z poziomami potrzeb wodnych i swietlnych. Dodatkowo, na planszy pojawia sie rozrzucone zwierzeta, takie jak wilki, jelenie i ptaki. \n" +
+                "Kazdy z tych organizmow bedzie posiadall okreslone cechy, takie jak tempo wzrostu, zdolnosc do przemieszczania sie oraz preferencje pokarmowe. \n" +
+                "W trakcie symulacji beda generowane losowe zdarzenia, takie jak pozary lesne, susze lub deszcze, ktore będą wplywac na stan ekosystemu i dynamike populacji. \n" +
+                "Symulacja bedzie odzwierciedlac zaleznosci pokarmowe, migracje zwierzat oraz interakcje pomiedzy gatunkami. \n" +
+                "Dla kazdego etapu symulacji beda zbierane dane dotyczace licznosci populacji poszczegolnych gatunkow oraz stanu srodowiska.\n" +
+                "Po zakonczeniu symulacji dane te zostana zapisane w formie pliku CSV w celu dalszej analizy.\n");
+
+        EcosystemSimulation simulation = new EcosystemSimulation(50, 50);
 
         // Dodawanie obserwatora
         Observer consoleObserver = new ConsoleObserver();

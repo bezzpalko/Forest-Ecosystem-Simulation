@@ -21,7 +21,16 @@ class Deer extends Animal {
 
     @Override
     public void move() {
-        getPosition().translate(5, 0);  // ecosystem.Deer move 5 units
+        getPosition().translate(4, 4);  // ecosystem.Deer move 5 units
+
+        // Ensure x and y are within the bounds of 0 to 50
+        Point position = getPosition();
+        if (position.getX() > 50) {
+            position.setX(0);
+        }
+        if (position.getY() > 50) {
+            position.setY(0);
+        }
     }
 
     @Override
