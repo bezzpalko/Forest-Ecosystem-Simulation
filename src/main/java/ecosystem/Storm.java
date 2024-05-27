@@ -1,26 +1,5 @@
 package ecosystem;//import java.util.Random;
-//
-//public class ecosystem.Storm {
-//    private int power;
-//    private Random random;
-//
-//    public ecosystem.Storm() {
-//        this.random = new Random();
-//        this.power = random.nextInt(10) + 1;
-//    }
-//
-//    public void place(ecosystem.Environment environment) {
-//        environment.applyStorm(power);
-//    }
-//
-//    public int getPower() {
-//        return power;
-//    }
-//    @Override
-//    public String toString() {
-//        return "ecosystem.Storm{" + "power=" + power + '}';
-//    }
-//}
+
 import ecosystem.Environment;
 
 import java.util.Random;

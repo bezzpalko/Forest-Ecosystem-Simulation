@@ -1,21 +1,4 @@
-package ecosystem;//
-//import java.util.Random;
-//public class ecosystem.Drought {
-//    private int strength;
-//    private Random random;
-//
-//    public ecosystem.Drought() {
-//        this.random = new Random();
-//        this.strength = random.nextInt(10) + 1;
-//    }
-//
-//    public void dry(Environment environment) {
-//        environment.applyDrought(strength);
-//    }
-//    public int getStrength() {
-//        return strength;
-//    }
-//}
+package ecosystem;
 import java.util.Random;
 
 public class Drought implements WeatherEvent {

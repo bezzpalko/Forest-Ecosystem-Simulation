@@ -70,10 +70,10 @@ public class Menu {
         System.out.println("2. Dodaj roślinę");
         System.out.println("3. Dodaj dodatkowe zdarzenie pogodowe");
         System.out.println("4. Dodaj dodatkowy ruch zwierzat");
-        System.out.println("5. Przesuń rośliny");
+        System.out.println("5. Dodaj dodtakowy ruch roslin");
         System.out.println("6. Usun zwierze");
         System.out.println("7. Usuń roślinę");
-        System.out.println("8. Wykonaj podstawowy krok symulacji (ruch zwierzat i zdarzenie pogodowe)");
+        System.out.println("8. Wykonaj podstawowy krok symulacji (ruch zwierzat/ruch roslin i zdarzenie pogodowe)");
         System.out.println("9. Wyswietl populacje");
         System.out.println("10. Wyswietl liste zdarzen pogodowych");
         System.out.println("11. Wyswietl dane srodowiska");

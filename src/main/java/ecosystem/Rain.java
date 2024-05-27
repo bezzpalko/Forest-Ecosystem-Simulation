@@ -1,24 +1,5 @@
 package ecosystem;//
-//import java.util.Random;
-//
-//public class ecosystem.Rain {
-//    private int water;
-//    private Random random;
-//    public ecosystem.Rain() {
-//        this.random = new Random();
-//        this.water = random.nextInt(10) + 1;
-//    }
-//    public void destroy(ecosystem.Environment environment) {
-//        environment.applyRain(water);
-//    }
-//    public int getWater() {
-//        return water;
-//    }
-//    @Override
-//    public String toString() {
-//        return "ecosystem.Rain{" + "water=" + water + '}';
-//    }
-//}
+
 import ecosystem.Environment;
 
 import java.util.Random;
