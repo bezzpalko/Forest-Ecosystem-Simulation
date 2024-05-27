@@ -12,6 +12,7 @@ public class EcosystemSimulation extends Observable {
     final int width;
     final int height;
     private List<Animal> animals;
+    private List<Plant> plants;
     private Environment environment;
     private List<String> weatherEvents;
     private Random random;
@@ -23,6 +24,7 @@ public class EcosystemSimulation extends Observable {
         this.height = height;
         this.environment = new Environment(100, 100); // przykładowe początkowe wartości
         this.animals = new ArrayList<>();
+        this.plants = new ArrayList<>();
         this.weatherEvents = new ArrayList<>();
         this.random = new Random();
         this.scanner = new Scanner(System.in);
@@ -40,6 +42,18 @@ public class EcosystemSimulation extends Observable {
         notifyObservers("animalRemoved" + animal);
     }
 
+    public void addPlant(Plant plant) {
+        plants.add(plant);
+        setChanged();
+        notifyObservers("plantAdded" + plant);
+    }
+
+    public void removePlant(Plant plant) {
+        plants.remove(plant);
+        setChanged();
+        notifyObservers("plantRemoved" + plant);
+    }
+
 //    public void addWeatherCondition(WeatherEvent event) {
 //        event.apply(environment);
 //        eventLog.add(event.toString());
@@ -48,6 +62,10 @@ public class EcosystemSimulation extends Observable {
 //    }
     public List<Animal> getAnimals() {
         return animals;
+    }
+
+    public List<Plant> getPlants() {
+        return plants;
     }
 
     public Environment getEnvironment() {
@@ -69,6 +87,12 @@ public class EcosystemSimulation extends Observable {
             animal.move();
             setChanged();
             notifyObservers("animalMoved" + animal);
+        }
+
+        for (Plant plant : plants) {
+            plant.move();
+            setChanged();
+            notifyObservers("plantMoved" + plant);
         }
     }
 
@@ -171,6 +195,11 @@ public class EcosystemSimulation extends Observable {
             animal.reactToEvent(event.toString());
             notifyObservers("Animal reacted: " + animal);
         }
+
+        for (Plant plant : plants) {
+            plant.reactToEvent(event.toString());
+            notifyObservers("Animal reacted: " + plant);
+        }
     }
 
 
@@ -185,6 +214,18 @@ public class EcosystemSimulation extends Observable {
                         " at " + animal.getPosition().getX() + ", " + animal.getPosition().getY() +
                         "\n Health: " + animal.getHealth() +
                         "\n Energy: " + animal.getEnergy() + "\n");
+            }
+        }
+
+        System.out.println("Rośliny:");
+        if (plants.isEmpty()) {
+            System.out.println("Brak roślin.");
+        } else {
+            for (Plant plant : plants) {
+                System.out.println(plant.getClass().getSimpleName() +
+                        " at " + plant.getPosition().getX() + ", " + plant.getPosition().getY() +
+                        "\n Health: " + plant.getHealth() +
+                        "\n Hydration: " + plant.getHydration() + "\n");
             }
         }
     }
@@ -230,6 +271,31 @@ public class EcosystemSimulation extends Observable {
                 writer.append('\n');
             }
 
+            writer.append("Plant,Health,Hydration,GrowthStage,Position,Height/Diameter/IsBlooming\n");
+            for (Plant plant : plants) {
+                writer.append(plant.getClass().getSimpleName())
+                        .append(',')
+                        .append(String.valueOf(plant.getHealth()))
+                        .append(',')
+                        .append(String.valueOf(plant.getHydration()))
+                        .append(',')
+                        .append(plant.getGrowthStage())
+                        .append(',')
+                        .append(plant.getPosition().toString())
+                        .append(',');
+
+                if (plant instanceof Tree) {
+                    writer.append(String.valueOf(((Tree) plant).getHeight()));
+                } else if (plant instanceof Bush) {
+                    writer.append(String.valueOf(((Bush) plant).getDiameter()));
+                } else if (plant instanceof Flower) {
+                    writer.append(String.valueOf(((Flower) plant).isBlooming()));
+                }
+
+                writer.append('\n');
+            }
+
+
             writer.append("Environment,WaterLevel,LightLevel\n");
             writer.append("Environment,")
                     .append(String.valueOf(environment.getWaterLevel()))
@@ -258,12 +324,16 @@ public class EcosystemSimulation extends Observable {
         EcosystemSimulation simulation = new EcosystemSimulation(50, 50);
 
         // Dodawanie obserwatora
-        Observer consoleObserver = new ConsoleObserver();
-        simulation.addObserver(consoleObserver);
-
+//        Observer consoleObserver = new ConsoleObserver();
+//        simulation.addObserver(consoleObserver);
+//
 //        simulation.addAnimal(new Wolf(100, 100, new Point(0, 0), "carnivore"));
 //        simulation.addAnimal(new Deer(100, 100, new Point(10, 10), "herbivore"));
 //        simulation.addAnimal(new Bird(100, 100, new Point(20, 20), "omnivore"));
+//
+//        simulation.addPlant(new Tree(90, 30, "rest", new Point(5, 15), 50));
+//        simulation.addPlant(new Bush(90, 40, "growth", new Point(10, 25), 5));
+//        simulation.addPlant(new Flower(90, 50, "blooming", new Point(12, 30), true));
 //
 //        simulation.simulate();
 //
