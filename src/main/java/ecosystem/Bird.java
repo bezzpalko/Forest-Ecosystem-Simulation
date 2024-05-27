@@ -33,16 +33,14 @@ class Bird extends Animal {
 
     @Override
     public void reactToEvent(String event) {
-        switch (event) {
-            case "drought":
-                setEnergy(getEnergy() - 5);
-                break;
-            case "rain":
-                setEnergy(getEnergy() + 5);
-                break;
-            case "storm":
-                setHealth(getHealth() - 10);
-                break;
+        if (event.contains("Drought")) {
+            setHealth(getHealth() - 5);
+            setEnergy(getEnergy() - 10);
+        } else if (event.contains("Rain")) {
+            setHealth(getHealth() + 10);
+            setEnergy(getEnergy() + 10);
+        } else if (event.contains("Storm")) {
+            setHealth(getHealth() - 20);
         }
     }
 

@@ -37,17 +37,14 @@ class Wolf extends Animal {
 
     @Override
     public void reactToEvent(String event) {
-        switch (event) {
-            case "drought":
-                setHealth(getHealth() - 5);
-                break;
-            case "rain":
-                setEnergy(getEnergy() + 5);
-                break;
-            case "storm":
-                setEnergy(getEnergy() - 5);
-                setHealth(getHealth() - 5);
-                break;
+        if (event.contains("Drought")) {
+            setHealth(getHealth() - 10);
+            setEnergy(getEnergy() - 10);
+        } else if (event.contains("Rain")) {
+            setHealth(getHealth() + 5);
+            setEnergy(getEnergy() + 5);
+        } else if (event.contains("Storm")) {
+            setHealth(getHealth() - 5);
         }
     }
 
