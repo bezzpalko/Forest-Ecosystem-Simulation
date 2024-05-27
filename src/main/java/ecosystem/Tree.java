@@ -20,18 +20,14 @@ public class Tree extends Plant {
     // response to weather conditions
     @Override
     public void reactToEvent(String event) {
-        switch (event) {
-            case "drought":
-                setHealth(getHealth() - 5);
-                setHydration(getHydration() - 5);
-                break;
-            case "rain":
-                setHealth(getHealth() + 10);
-                setHydration(getHydration() + 10);
-                break;
-            case "storm":
-                setHealth(getHealth() - 5);
-                break;
+        if (event.contains("Drought")) {
+            setHealth(getHealth() - 15);
+            setHydration(getHydration() - 25);
+        } else if (event.contains("Rain")) {
+            setHealth(getHealth() + 15);
+            setHydration(getHydration() + 25);
+        } else if (event.contains("Storm")) {
+            setHealth(getHealth() - 30);
         }
     }
 
