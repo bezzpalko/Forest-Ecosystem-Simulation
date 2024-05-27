@@ -14,7 +14,7 @@ public class Observable {
         observers.remove(observer);
     }
 
-    public void notifyObservers(String eventType, Object data) { //przez listę obserwatorów: wywołuje update z arg, informując ich o zdarzeniu.
+    public void notifyObservers(String eventType, Object data) { //by a list of observers: calls update from arg, informing them of the event.
         for (Observer observer : observers) {
             observer.update(eventType, data);
         }

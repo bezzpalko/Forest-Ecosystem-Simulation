@@ -5,9 +5,9 @@ import ecosystem.Plant;
 public class Tree extends Plant {
     private int height; // tree height
 
-    public Tree(int health, int hydration, String growthStage, Point position, int height) {
+    public Tree(int health, int hydration, String growthStage, Point position) {
         super(health, hydration, growthStage, position);
-        this.height = height;
+        this.height = 30;
     }
 
     public int getHeight() {

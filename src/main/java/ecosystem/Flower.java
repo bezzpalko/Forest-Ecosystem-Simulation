@@ -5,9 +5,9 @@ import ecosystem.Plant;
 public class Flower extends Plant {
     private boolean isBlooming; // is the flower blooming
 
-    public Flower(int health, int hydration, String growthStage, Point position, boolean isBlooming) {
+    public Flower(int health, int hydration, String growthStage, Point position) {
         super(health, hydration, growthStage, position);
-        this.isBlooming = isBlooming;
+        this.isBlooming = true;
     }
 
     public boolean isBlooming() {

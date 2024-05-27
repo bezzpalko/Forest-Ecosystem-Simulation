@@ -26,17 +26,17 @@ class Environment {
     }
 
     public void applyDrought(int strength) {
-        waterLevel = Math.max(0, waterLevel - strength); //waterLevel zmniejsza się o wartość strength; nie spada poniżej zera
+        waterLevel = Math.max(0, waterLevel - strength); //waterLevel decreases by the strength value; it does not drop below zero
     }
     public void applyRain(int amount) {
         waterLevel += amount;
     }
 
     public void applyStorm(int power) {
-        if (power % 2 == 0) { //gdy power - parzysta, lightLevel zwiększa się o wartość power
+        if (power % 2 == 0) { //when power - even, lightLevel increases by the value of power
             lightLevel += power;
         } else {
-            lightLevel = Math.max(0, lightLevel - power); //gdy power - nieparzysta, lightLevel zmniejsza się o wartość power; nie spada poniżej zera
+            lightLevel = Math.max(0, lightLevel - power); //when power - odd, lightLevel decreases by the value of power; does not fall below zero
         }
     }
 }

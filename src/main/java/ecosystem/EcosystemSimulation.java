@@ -22,7 +22,7 @@ public class EcosystemSimulation extends Observable {
     public EcosystemSimulation(int width, int height) {
         this.width = width;
         this.height = height;
-        this.environment = new Environment(100, 100); // przykładowe początkowe wartości
+        this.environment = new Environment(100, 100); // example initial values
         this.animals = new ArrayList<>();
         this.plants = new ArrayList<>();
         this.weatherEvents = new ArrayList<>();
@@ -69,7 +69,7 @@ public class EcosystemSimulation extends Observable {
 //        return eventLog;
 //    }
 
-    public void simulate() { //zaktualizuj, wygeneruj zdarzenia, ustaw zmiany
+    public void simulate() { // update, generate events, set changes
         updateStates();
         generateEvents();
         setChanged();
@@ -91,10 +91,10 @@ public class EcosystemSimulation extends Observable {
     }
 
     public void generateEvents() {
-        System.out.println("Wybierz typ zdarzenia pogodowego do wywolania:");
-        System.out.println("1. Susza (Drought)");
-        System.out.println("2. Deszcz (Rain)");
-        System.out.println("3. Burza (Storm)");
+        System.out.println("Select the type of weather event to call:");
+        System.out.println("1. Drought");
+        System.out.println("2. Rain");
+        System.out.println("3. Storm");
         int eventType = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
@@ -110,18 +110,18 @@ public class EcosystemSimulation extends Observable {
                 event = new Storm();
                 break;
             default:
-                System.out.println("Nieprawidlowy wybor, prosze wybrac numer od 1 do 3.");
-                return; // Zakończenie metody, jeśli wybrano nieprawidłową opcję
+                System.out.println("Incorrect selection, please select number 1 to 3.");
+                return; // Termination of the method if an invalid option is selected
         }
 
         applyEventToEnvironment(event);
     }
 
-    public void applyEventToEnvironment(WeatherEvent event) { //odanie zdarzenia do środowiska
+    public void applyEventToEnvironment(WeatherEvent event) { //giving the event back to the environment
         event.apply(environment);
 
 
-        String eventDetails = "Zdarzenie: " + event.getClass().getSimpleName() + " {";
+        String eventDetails = "Event: " + event.getClass().getSimpleName() + " {";
         if (event instanceof Drought) {
             eventDetails += "strength=" + ((Drought) event).getStrength();
         } else if (event instanceof Rain) {
@@ -146,12 +146,12 @@ public class EcosystemSimulation extends Observable {
 
 
     public void printPopulation() {
-        System.out.println("Populacja:");
+        System.out.println("Population:");
         if (animals.isEmpty()) {
-            System.out.println("Brak zwierzat.");
+            System.out.println("No animals.");
         } else {
             for (Animal animal : animals) {
-                // Pobranie informacji o zwierzęciu i formatowanie wyjścia
+                // Downloading animal information and formatting the output
                 System.out.println(animal.getClass().getSimpleName() +
                         " at " + animal.getPosition().getX() + ", " + animal.getPosition().getY() +
                         "\n Health: " + animal.getHealth() +
@@ -159,11 +159,12 @@ public class EcosystemSimulation extends Observable {
             }
         }
 
-        System.out.println("Rośliny:");
+        System.out.println("Plants:");
         if (plants.isEmpty()) {
-            System.out.println("Brak roślin.");
+            System.out.println("No plants.");
         } else {
             for (Plant plant : plants) {
+                // Downloading plant information and formatting the output
                 System.out.println(plant.getClass().getSimpleName() +
                         " at " + plant.getPosition().getX() + ", " + plant.getPosition().getY() +
                         "\n Health: " + plant.getHealth() +
@@ -172,15 +173,15 @@ public class EcosystemSimulation extends Observable {
         }
     }
     public void printEnvironmentData() {
-        System.out.println("Dane srodowiska:");
-        System.out.println("Poziom wody: " + environment.getWaterLevel());
-        System.out.println("Poziom swiatla: " + environment.getLightLevel());
+        System.out.println("Environmental data:");
+        System.out.println("Water level: " + environment.getWaterLevel());
+        System.out.println("Light level: " + environment.getLightLevel());
     }
     public void printWeatherEvents() {
         if (weatherEvents.isEmpty()) {
-            System.out.println("Brak zapisanych zdarzen pogodowych.");
+            System.out.println("No recorded weather events.");
         } else {
-            System.out.println("Dotychczasowe zdarzenia pogodowe:");
+            System.out.println("Weather events to date:");
             for (String event : weatherEvents) {
                 System.out.println(event);
             }
@@ -255,13 +256,13 @@ public class EcosystemSimulation extends Observable {
         }
     }
     public static void main(String[] args) {
-        System.out.println("Symulacja ekosystemu lesnego: rozne gatunki roslin i zwierzat oddzialuja ze soba. Symulacja bedzie obejmowac srodowisko - plansze o z gory okreslonych wymiarach: 50 x 50.\n" +
-                "Na poczatku symulacji, rozmieszczone zostana gatunki roslin, z poziomami potrzeb wodnych i swietlnych. Dodatkowo, na planszy pojawia sie rozrzucone zwierzeta, takie jak wilki, jelenie i ptaki. \n" +
-                "Kazdy z tych organizmow bedzie posiadall okreslone cechy, takie jak tempo wzrostu, zdolnosc do przemieszczania sie oraz preferencje pokarmowe. \n" +
-                "W trakcie symulacji beda generowane losowe zdarzenia, takie jak pozary lesne, susze lub deszcze, ktore będą wplywac na stan ekosystemu i dynamike populacji. \n" +
-                "Symulacja bedzie odzwierciedlac zaleznosci pokarmowe, migracje zwierzat oraz interakcje pomiedzy gatunkami. \n" +
-                "Dla kazdego etapu symulacji beda zbierane dane dotyczace licznosci populacji poszczegolnych gatunkow oraz stanu srodowiska.\n" +
-                "Po zakonczeniu symulacji dane te zostana zapisane w formie pliku CSV w celu dalszej analizy.\n");
+        System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 50 x 50.\n" +
+                "At the start of the simulation, plant species will be distributed, with levels of water and light needs. In addition, scattered animals such as wolves, deer and birds appear on the board. \n" +
+                "Each of these organisms will have certain characteristics, such as growth rate, ability to move and food preferences. \n" +
+                "Random events such as forest fires, droughts or rains will be generated during the simulation, which will affect the state of the ecosystem and population dynamics. \n" +
+                "The simulation will reflect food relationships, animal migrations and interactions between species. \n" +
+                "For each stage of the simulation, data will be collected on the population sizes of the different species and on the state of the environment.’ + ‘At the end of the simulation, data will be collected. \n" +
+                "At the end of the simulation these data will be saved as a CSV file for further analysis. \n");
 
         EcosystemSimulation simulation = new EcosystemSimulation(50, 50);
 

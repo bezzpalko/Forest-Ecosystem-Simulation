@@ -5,9 +5,9 @@ import ecosystem.Plant;
 public class Bush extends Plant {
     private int diameter; // bush diameter
 
-    public Bush(int health, int hydration, String growthStage, Point position, int diameter) {
+    public Bush(int health, int hydration, String growthStage, Point position) {
         super(health, hydration, growthStage, position);
-        this.diameter = diameter;
+        this.diameter = 15;
     }
 
     public int getDiameter() {

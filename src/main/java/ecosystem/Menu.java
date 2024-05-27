@@ -56,35 +56,35 @@ public class Menu {
                     saveSimulationDataToCSV();
                     break;
                 case 13:
-                    System.out.println("Zakonczenie programu.");
+                    System.out.println("End of the programme.");
                     return;
                 default:
-                    System.out.println("Nieprawidlowa opcja.");
+                    System.out.println("Wrong option.");
             }
         }
     }
 
     private void printMenu() {
-        System.out.println("\n--- Menu ---");
-        System.out.println("1. Dodaj zwierze");
-        System.out.println("2. Dodaj roślinę");
-        System.out.println("3. Dodaj dodatkowe zdarzenie pogodowe");
-        System.out.println("4. Dodaj dodatkowy ruch zwierzat");
-        System.out.println("5. Dodaj dodtakowy ruch roslin");
-        System.out.println("6. Usun zwierze");
-        System.out.println("7. Usuń roślinę");
-        System.out.println("8. Wykonaj podstawowy krok symulacji (ruch zwierzat/ruch roslin i zdarzenie pogodowe)");
-        System.out.println("9. Wyswietl populacje");
-        System.out.println("10. Wyswietl liste zdarzen pogodowych");
-        System.out.println("11. Wyswietl dane srodowiska");
-        System.out.println("12. Zapisz dane do CSV");
-        System.out.println("13. Wyjscie z symulacji");
-        System.out.print("Wybierz opcje: ");
+        System.out.println("\n--- The menu ---");
+        System.out.println("1. Add animal");
+        System.out.println("2. Add plant");
+        System.out.println("3. Add an additional weather event");
+        System.out.println("4. Add additional animal movement");
+        System.out.println("5. Add additional plant movement");
+        System.out.println("6. Remove the animal");
+        System.out.println("7. Remove the plant");
+        System.out.println("8. Perform basic simulation step (animal movement/plant movement and weather event)");
+        System.out.println("9. View Populations");
+        System.out.println("10. View a list of weather events");
+        System.out.println("11. View environment data");
+        System.out.println("12. Save data to CSV");
+        System.out.println("13. Exit from the simulation");
+        System.out.print("Select options:");
     }
 
 
     private void addAnimal() {
-        System.out.println("Wybierz typ zwierzecia:");
+        System.out.println("Select animal type:");
         System.out.println("1. Wolf");
         System.out.println("2. Deer");
         System.out.println("3. Bird");
@@ -98,16 +98,16 @@ public class Menu {
         Animal animal;
         switch (choice) {
             case 1:
-                animal = new Wolf(40, 30, new Point(x, y), "miesozerny");
+                animal = new Wolf(40, 30, new Point(x, y), "carnivorous");
                 break;
             case 2:
-                animal = new Deer(50, 40, new Point(x, y), "roslinozerny");
+                animal = new Deer(50, 40, new Point(x, y), "herbivorous");
                 break;
             case 3:
-                animal = new Bird(20, 20, new Point(x, y), "wszystkozerny");
+                animal = new Bird(20, 20, new Point(x, y), "omnivorous");
                 break;
             default:
-                System.out.println("Nieprawidlowa opcja.");
+                System.out.println("Wrong option.");
                 return;
         }
         simulation.addAnimal(animal);
@@ -116,11 +116,11 @@ public class Menu {
         for (Animal animal : simulation.getAnimals()) {
             animal.move();
         }
-        System.out.println("Zwierzeta wykonaly dodatkowy ruch.");
+        System.out.println("The animals made an additional move.");
     }
 
     private void removeAnimal() {
-        System.out.print("Podaj indeks zwierzecia:");
+        System.out.print("Enter the animal's index:");
         int index = scanner.nextInt();
         scanner.nextLine(); // consume newline
 
@@ -129,14 +129,14 @@ public class Menu {
         if (index >= 0 && index < animalList.size()) {
             Animal animal = animalList.get(index);
             simulation.removeAnimal(animal);
-            System.out.println("Zwierze zostalo usuniete.");
+            System.out.println("The animal has been removed.");
         } else {
-            System.out.println("Nieprawidlowy indeks.");
+            System.out.println("Wrong index.");
         }
     }
 
     private void addPlant() {
-        System.out.println("Wybierz typ rośliny:");
+        System.out.println("Select the type of plant:");
         System.out.println("1. Tree");
         System.out.println("2. Bush");
         System.out.println("3. Flower");
@@ -150,16 +150,16 @@ public class Menu {
         Plant plant;
         switch (choice) {
             case 1:
-                plant = new Tree(90, 30, "rest", new Point(x, y), 50);
+                plant = new Tree(90, 30, "rest", new Point(x, y));
                 break;
             case 2:
-                plant = new Bush(90, 40, "growth", new Point(x, y), 5);
+                plant = new Bush(90, 40, "growth", new Point(x, y));
                 break;
             case 3:
-                plant = new Flower(90, 50, "blooming", new Point(x, y), true);
+                plant = new Flower(90, 50, "blooming", new Point(x, y));
                 break;
             default:
-                System.out.println("Nieprawidlowa opcja.");
+                System.out.println("Wrong option.");
                 return;
         }
         simulation.addPlant(plant);
@@ -184,14 +184,14 @@ public class Menu {
             simulation.removePlant(plant);
             System.out.println("The plant has been removed.");
         } else {
-            System.out.println("Incorrect index.");
+            System.out.println("Wrong index.");
         }
     }
 
     private void saveSimulationDataToCSV() {
-        System.out.print("Podaj nazwe pliku do zapisania danych: ");
+        System.out.print("Specify the name of the file to save the data: ");
         String filename = scanner.nextLine();
         simulation.saveSimulationDataToCSV(filename);
-        System.out.println("Dane zapisane do pliku " + filename);
+        System.out.println("Data saved to file " + filename);
     }
 }
