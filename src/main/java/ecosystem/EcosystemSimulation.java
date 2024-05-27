@@ -132,7 +132,6 @@ public class EcosystemSimulation extends Observable {
         eventDetails += '}';
         weatherEvents.add(eventDetails);
 
-        String eventString = event.getClass().getSimpleName();
 
         for (Animal animal : animals) {
             animal.reactToEvent(event.toString());
