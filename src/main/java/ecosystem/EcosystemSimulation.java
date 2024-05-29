@@ -41,6 +41,17 @@ public class EcosystemSimulation extends Observable {
         setChanged();
         notifyObservers("animalRemoved" + animal);
     }
+    public void checkAndRemoveDeadAnimals() {
+        List<Animal> animalsToRemove = new ArrayList<>();
+        for (Animal animal : animals) {
+            if (animal.getHealth() <= 0 || animal.getEnergy() <= 0) {
+                animalsToRemove.add(animal);
+            }
+        }
+        for (Animal animal : animalsToRemove) {
+            removeAnimal(animal);
+        }
+    }
 
     public void addPlant(Plant plant) {
         plants.add(plant);
@@ -65,13 +76,11 @@ public class EcosystemSimulation extends Observable {
     public Environment getEnvironment() {
         return environment;
     }
-//    public List<String> getEventLog() {
-//        return eventLog;
-//    }
 
     public void simulate() { // update, generate events, set changes
         updateStates();
         generateEvents();
+        checkAndRemoveDeadAnimals();
         setChanged();
         notifyObservers("Simulation step completed.");
     }

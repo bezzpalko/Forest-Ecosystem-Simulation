@@ -37,23 +37,44 @@ class Wolf extends Animal {
 
     @Override
     public void reactToEvent(String event) {
+        int healthChange = 0;
+        int energyChange = 0;
+
         if (event.contains("Drought")) {
-            setHealth(getHealth() - 10);
-            setEnergy(getEnergy() - 10);
+            healthChange = -5;
+            energyChange = -5;
         } else if (event.contains("Rain")) {
-            setHealth(getHealth() + 5);
-            setEnergy(getEnergy() + 5);
+            healthChange = 5;
+            energyChange = 5;
         } else if (event.contains("Storm")) {
-            setHealth(getHealth() - 5);
+            healthChange = -5;
         }
+
+        setHealth(getHealth() + healthChange);
+        setEnergy(getEnergy() + energyChange);
+
+        reactToEventMessage(event, healthChange, energyChange);
+    }
+
+    private void reactToEventMessage(String event, int healthChange, int energyChange) {
+        System.out.println(getClass().getSimpleName() + " reacted to " + event
+                + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
     }
 
     @Override
     public void interact(Animal other) {
+        int energyChange = 0;
         if (other instanceof Deer) {
-            setEnergy(getEnergy() + 10);  // Example: ecosystem.Wolf eats the ecosystem.Deer
+            energyChange = 10;
+            setEnergy(getEnergy() + energyChange); // Example: ecosystem.Wolf eats the ecosystem.Deer
         } else if (other instanceof Bird) {
-            setEnergy(getEnergy() + 5);  // Example: ecosystem.Wolf scares the ecosystem.Bird away
+            energyChange = 5;
+            setEnergy(getEnergy() + energyChange); // Example: ecosystem.Wolf scares the ecosystem.Bird away
         }
+        interactMessage(other, energyChange);
+    }
+    private void interactMessage(Animal other, int energyChange) {
+        System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
+                + ". Energy changed by " + energyChange);
     }
 }
