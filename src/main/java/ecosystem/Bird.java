@@ -33,7 +33,7 @@ class Bird extends Animal {
 
     @Override
     public void reactToEvent(String event) {
-        int healthChange = 0;
+        int healthChange = 0; //powtarza sie w wielu miejscach
         int energyChange = 0;
 
         if (event.contains("Drought")) {

@@ -13,7 +13,7 @@ class Environment {
         return waterLevel;
     }
 
-    public void setWaterLevel(int waterLevel) {
+    public void setWaterLevel(int waterLevel) { //używane?
         this.waterLevel = waterLevel;
     }
 
@@ -23,7 +23,7 @@ class Environment {
 
     public void setLightLevel(int lightLevel) {
         this.lightLevel = lightLevel;
-    }
+    } //używane??
 
     public void applyDrought(int strength) {
         waterLevel = Math.max(0, waterLevel - strength); //waterLevel decreases by the strength value; it does not drop below zero

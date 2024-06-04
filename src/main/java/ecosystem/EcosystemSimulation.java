@@ -13,7 +13,7 @@ public class EcosystemSimulation extends Observable {
     final int height;
     private List<Animal> animals;
     private List<Plant> plants;
-    private Environment environment;
+    final Environment environment; //na final
     private List<String> weatherEvents;
     private Random random;
     private Scanner scanner;
