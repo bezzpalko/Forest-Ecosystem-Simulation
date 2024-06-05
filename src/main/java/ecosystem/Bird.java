@@ -33,7 +33,7 @@ class Bird extends Animal {
 
     @Override
     public void reactToEvent(String event) {
-        int healthChange = 0; //powtarza sie w wielu miejscach
+        int healthChange = 0;
         int energyChange = 0;
 
         if (event.contains("Drought")) {
@@ -46,29 +46,19 @@ class Bird extends Animal {
             healthChange = -5;
         }
 
-        setHealth(getHealth() + healthChange);
-        setEnergy(getEnergy() + energyChange);
-
+        updateHealthAndEnergy(healthChange, energyChange);
         reactToEventMessage(event, healthChange, energyChange);
     }
 
-    private void reactToEventMessage(String event, int healthChange, int energyChange) {
-        System.out.println(getClass().getSimpleName() + " reacted to " + event
-                + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
-    }
     @Override
     public void interact(Animal other) {
         int energyChange = 0;
-        if (other instanceof Deer) { // Example: ecosystem.Bird helps Deer find food
+        if (other instanceof Deer) {
             energyChange = -5;
-            setEnergy(getEnergy() + energyChange);
-        } else if (other instanceof Wolf) { // Example: ecosystem.Bird is scared by Wolf
+        } else if (other instanceof Wolf) {
             energyChange = -10;
-            setEnergy(getEnergy() + energyChange);
         }
-    interactMessage(other, energyChange);
-    }
-    private void interactMessage(Animal other, int energyChange) {
-        System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()  + ". Energy changed by " + energyChange);
+        setEnergy(getEnergy() + energyChange);
+        interactMessage(other, energyChange);
     }
 }

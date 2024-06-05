@@ -49,16 +49,8 @@ class Wolf extends Animal {
         } else if (event.contains("Storm")) {
             healthChange = -5;
         }
-
-        setHealth(getHealth() + healthChange);
-        setEnergy(getEnergy() + energyChange);
-
+        updateHealthAndEnergy(healthChange, energyChange);
         reactToEventMessage(event, healthChange, energyChange);
-    }
-
-    private void reactToEventMessage(String event, int healthChange, int energyChange) {
-        System.out.println(getClass().getSimpleName() + " reacted to " + event
-                + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
     }
 
     @Override
@@ -66,15 +58,10 @@ class Wolf extends Animal {
         int energyChange = 0;
         if (other instanceof Deer) {
             energyChange = 10;
-            setEnergy(getEnergy() + energyChange); // Example: ecosystem.Wolf eats the ecosystem.Deer
         } else if (other instanceof Bird) {
             energyChange = 5;
-            setEnergy(getEnergy() + energyChange); // Example: ecosystem.Wolf scares the ecosystem.Bird away
         }
+        setEnergy(getEnergy() + energyChange);
         interactMessage(other, energyChange);
-    }
-    private void interactMessage(Animal other, int energyChange) {
-        System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
-                + ". Energy changed by " + energyChange);
     }
 }

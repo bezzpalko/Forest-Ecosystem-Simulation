@@ -41,12 +41,30 @@ abstract class Animal {
     public void setDiet(String diet) {
         this.diet = diet;
     }
+
     //moving
+// Metoda do aktualizacji zdrowia i energii
+    protected void updateHealthAndEnergy(int healthChange, int energyChange) {
+        setHealth(getHealth() + healthChange);
+        setEnergy(getEnergy() + energyChange);
+    }
+
+    // Metoda do wyświetlania komunikatów po reakcji na zdarzenie
+    protected void reactToEventMessage(String event, int healthChange, int energyChange) {
+        System.out.println(getClass().getSimpleName() + " reacted to " + event
+                + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
+    }
+
+    // Metoda do wyświetlania komunikatów po interakcji ze zwierzęciem
+    protected void interactMessage(Animal other, int energyChange) {
+        System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
+                + ". Energy changed by " + energyChange);
+    }
+
+    // Abstract methods
     public abstract void move();
 
-    //reacting to random events
     public abstract void reactToEvent(String event);
 
-    //interacting with other animals
     public abstract void interact(Animal other);
 }

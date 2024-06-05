@@ -4,8 +4,8 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
 public class Menu {
-    private EcosystemSimulation simulation;
-    private Scanner scanner;
+    final EcosystemSimulation simulation;
+    final Scanner scanner;
 
     public Menu(EcosystemSimulation simulation) {
         this.simulation = simulation;
