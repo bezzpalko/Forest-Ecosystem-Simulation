@@ -30,22 +30,21 @@ public class EcosystemSimulationTest {
     public void testAddAnimal() {
         Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "carnivorous");
         simulation.addAnimal(newWolf);
-        Assertions.assertTrue(simulation.getAnimals().contains(newWolf));
+        assertTrue(simulation.getAnimals().contains(newWolf), "Wolf should be added to the simulation.");
     }
 
     @Test
     public void testRemoveAnimal() {
         simulation.removeAnimal(wolf);
-        Assertions.assertFalse(simulation.getAnimals().contains(wolf));
+        assertFalse(simulation.getAnimals().contains(wolf), "Wolf should be removed from the simulation.");
     }
 
     @Test
     public void testSimulate() {
         simulation.simulate();
-        // Check if states are updated, assuming that move method modifies position
-        Assertions.assertNotEquals(new Point(0, 0), wolf.getPosition());
-        Assertions.assertNotEquals(new Point(10, 10), deer.getPosition());
-        Assertions.assertNotEquals(new Point(20, 20), bird.getPosition());
+        assertNotEquals(new Point(0, 0), wolf.getPosition(), "Wolf should have moved.");
+        assertNotEquals(new Point(10, 10), deer.getPosition(), "Deer should have moved.");
+        assertNotEquals(new Point(20, 20), bird.getPosition(), "Bird should have moved.");
     }
 
     @Test
@@ -58,8 +57,9 @@ public class EcosystemSimulationTest {
 
         try {
             List<String> lines = Files.readAllLines(file.toPath());
-            assertFalse(lines.isEmpty(), "CSV file should not be empty");
-            assertEquals("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers", lines.get(0), "CSV header should be correct");
+            assertFalse(lines.isEmpty(), "CSV file should not be empty.");
+            assertEquals("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers",
+                    lines.get(0), "CSV header should be correct.");
         } catch (IOException e) {
             fail("IOException should not occur");
         }
