@@ -1,0 +1,8 @@
+ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers
+Wolf,35,25,carnivorous,ecosystem.Point@6e0be858,false
+Plant,Health,Hydration,GrowthStage,Position,Height/Diameter/IsBlooming
+Tree,75,5,rest,ecosystem.Point@61bbe9ba,30
+Environment,WaterLevel,LightLevel
+Environment,91,100
+EventLog
+Event: Drought {strength=9}
