@@ -141,8 +141,8 @@ public class EcosystemSimulation {
                 //downloading animal information and formatting the output
                 System.out.println(animal.getClass().getSimpleName() +
                         " at " + animal.getPosition().getX() + ", " + animal.getPosition().getY() +
-                        "\n Health: " + animal.getHealth() +
-                        "\n Energy: " + animal.getEnergy() + "\n");
+                        "\n Health: " + animal.getHealth() + "/100" +
+                        "\n Energy: " + animal.getEnergy() + "/100\n");
             }
         }
 
@@ -154,8 +154,8 @@ public class EcosystemSimulation {
                 //downloading plant information and formatting the output
                 System.out.println(plant.getClass().getSimpleName() +
                         " at " + plant.getPosition().getX() + ", " + plant.getPosition().getY() +
-                        "\n Health: " + plant.getHealth() +
-                        "\n Hydration: " + plant.getHydration() + "\n");
+                        "\n Health: " + plant.getHealth() + "/100" +
+                        "\n Hydration: " + plant.getHydration() + "/100\n");
             }
         }
     }

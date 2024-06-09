@@ -17,14 +17,22 @@ abstract class Plant {
         return health;
     }
     public void setHealth(int health) {
-        this.health = health;
+        if (health > 100) {
+            this.health = 100;
+        } else {
+            this.health = health;
+        }
     }
 
     public int getHydration() {
         return hydration;
     }
     public void setHydration(int hydration) {
-        this.hydration = hydration;
+        if (hydration > 100) {
+            this.hydration = 100;
+        } else {
+            this.hydration = hydration;
+        }
     }
 
     public Point getPosition() {

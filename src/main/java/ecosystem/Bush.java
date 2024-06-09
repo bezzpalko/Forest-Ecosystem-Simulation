@@ -2,7 +2,7 @@ package ecosystem;
 
 import ecosystem.Plant;
 
-public class Bush extends Plant {
+class Bush extends Plant {
     private int diameter; // bush diameter
 
     public Bush(int health, int hydration, String growthStage, Point position) {
@@ -27,11 +27,11 @@ public class Bush extends Plant {
             healthChange = -10;
             hydrationChange = -10;
         } else if (event.contains("Rain")) {
-            healthChange = +5;
-            hydrationChange = +10;
+            healthChange = 5;
+            hydrationChange = 10;
         } else if (event.contains("Storm")) {
             healthChange = -10;
-            hydrationChange = +10;
+            hydrationChange = 10;
         }
         updateHealthAndHydration(healthChange, hydrationChange);
         reactToEventMessage(event, healthChange, hydrationChange);

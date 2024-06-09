@@ -2,7 +2,7 @@ package ecosystem;
 
 import ecosystem.Plant;
 
-public class Tree extends Plant {
+class Tree extends Plant {
     private int height; // tree height
 
     public Tree(int health, int hydration, String growthStage, Point position) {

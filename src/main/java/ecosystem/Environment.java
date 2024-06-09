@@ -14,7 +14,11 @@ class Environment {
     }
 
     public void setWaterLevel(int waterLevel) {
-        this.waterLevel = waterLevel;
+        if (waterLevel > 100) {
+            this.waterLevel = 100;
+        } else {
+            this.waterLevel = waterLevel;
+        }
     }
 
     public int getLightLevel() {
@@ -22,7 +26,11 @@ class Environment {
     }
 
     public void setLightLevel(int lightLevel) {
-        this.lightLevel = lightLevel;
+        if (lightLevel > 100) {
+            this.lightLevel = 100;
+        } else {
+            this.lightLevel = lightLevel;
+        }
     }
 
     public void applyDrought(int strength) {
@@ -30,6 +38,11 @@ class Environment {
     }
     public void applyRain(int amount) {
         waterLevel += amount;
+        if (waterLevel > 100) {
+            this.waterLevel = 100;
+        } else {
+            this.waterLevel = waterLevel;
+        }
     }
 
     public void applyStorm(int power) {

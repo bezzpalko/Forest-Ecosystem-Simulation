@@ -18,7 +18,11 @@ abstract class Animal {
     }
 
     public void setEnergy(int energy) {
-        this.energy = energy;
+        if (energy > 100) {
+            this.energy = 100;
+        } else {
+            this.energy = energy;
+        }
     }
 
     public int getHealth() {
@@ -26,7 +30,11 @@ abstract class Animal {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (health > 100) {
+            this.health = 100;
+        } else {
+            this.health = health;
+        }
     }
 
     public Point getPosition() {

@@ -97,13 +97,13 @@ public class Menu {
         Animal animal;
         switch (choice) {
             case 1:
-                animal = new Wolf(40, 30, new Point(x, y), "carnivorous");
+                animal = new Wolf(100, 100, new Point(x, y), "carnivorous");
                 break;
             case 2:
-                animal = new Deer(50, 40, new Point(x, y), "herbivorous");
+                animal = new Deer(100, 100, new Point(x, y), "herbivorous");
                 break;
             case 3:
-                animal = new Bird(20, 20, new Point(x, y), "omnivorous");
+                animal = new Bird(100, 100, new Point(x, y), "omnivorous");
                 break;
             default:
                 System.out.println("Wrong option.");
@@ -149,13 +149,13 @@ public class Menu {
         Plant plant;
         switch (choice) {
             case 1:
-                plant = new Tree(90, 30, "rest", new Point(x, y));
+                plant = new Tree(100, 100, "rest", new Point(x, y));
                 break;
             case 2:
-                plant = new Bush(90, 40, "growth", new Point(x, y));
+                plant = new Bush(100, 100, "growth", new Point(x, y));
                 break;
             case 3:
-                plant = new Flower(90, 50, "blooming", new Point(x, y));
+                plant = new Flower(100, 100, "blooming", new Point(x, y));
                 break;
             default:
                 System.out.println("Wrong option.");
