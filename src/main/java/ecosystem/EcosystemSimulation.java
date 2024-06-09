@@ -242,6 +242,9 @@ public class EcosystemSimulation {
             e.printStackTrace();
         }
     }
+    public void close() {
+        scanner.close();
+    }
     public static void main(String[] args) {
         System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 20 x 20.\n" +
                 "At the start of the simulation, plant species will be distributed, with levels of water and light needs. In addition, scattered animals such as wolves, deer and birds appear on the board. \n" +
