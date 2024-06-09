@@ -37,12 +37,7 @@ class Environment {
         waterLevel = Math.max(0, waterLevel - strength); //waterLevel decreases by the strength value; it does not drop below zero
     }
     public void applyRain(int amount) {
-        waterLevel += amount;
-        if (waterLevel > 100) {
-            this.waterLevel = 100;
-        } else {
-            this.waterLevel = waterLevel;
-        }
+        setWaterLevel(getWaterLevel() + amount);
     }
 
     public void applyStorm(int power) {
