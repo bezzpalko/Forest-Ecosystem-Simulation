@@ -44,6 +44,18 @@ public class EcosystemSimulation {
         }
     }
 
+    public void checkAndRemoveDeadPlants() {
+        List<Plant> plantsToRemove = new ArrayList<>();
+        for (Plant plant : plants) {
+            if (plant.getHealth() <= 0 || plant.getHydration() <= 0) {
+                plantsToRemove.add(plant);
+            }
+        }
+        for (Plant plant : plantsToRemove) {
+            removePlant(plant);
+        }
+    }
+
     public void addPlant(Plant plant) {
         plants.add(plant);
     }
@@ -68,6 +80,7 @@ public class EcosystemSimulation {
         updateStates();
         generateEvents();
         checkAndRemoveDeadAnimals();
+        checkAndRemoveDeadPlants();
     }
 
     private void updateStates() {
@@ -249,7 +262,7 @@ public class EcosystemSimulation {
         System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 20 x 20.\n" +
                 "In the simulation, you can add different types of plants and animals, change their location, and change weather conditions. \n" +
                 "Plants and animals appear on the board with an initial level of health, energy, or other indicator of 100%. Also, at the beginning of the simulation, the level of water and light is 100% \n" +
-                "When the feature level reaches zero, it means the end of the simulation." +
+                "When the feature level reaches zero, it means removing the plant or the animal." +
                 "Different weather conditions affect the state of plants and animals, as well as the state of the environment. \n" +
                 "For example, rainy weather increases the water level, which is important for plant hydration.\n" +
                 "During the simulation, different animals and plants can interact with each other, which affects their energy and health. \n" +

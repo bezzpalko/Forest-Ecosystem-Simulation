@@ -26,12 +26,18 @@ public class Menu {
                     break;
                 case 3:
                     simulation.generateEvents();
+                    simulation.checkAndRemoveDeadAnimals();
+                    simulation.checkAndRemoveDeadPlants();
                     break;
                 case 4:
                     moveAnimals();
+                    simulation.checkAndRemoveDeadAnimals();
+                    simulation.checkAndRemoveDeadPlants();
                     break;
                 case 5:
                     movePlants();
+                    simulation.checkAndRemoveDeadAnimals();
+                    simulation.checkAndRemoveDeadPlants();
                     break;
                 case 6:
                     removeAnimal();
