@@ -247,10 +247,12 @@ public class EcosystemSimulation {
     }
     public static void main(String[] args) {
         System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 20 x 20.\n" +
-                "At the start of the simulation, plant species will be distributed, with levels of water and light needs. In addition, scattered animals such as wolves, deer and birds appear on the board. \n" +
-                "Each of these organisms will have certain characteristics, such as growth rate, ability to move and food preferences. \n" +
-                "Random events such as forest fires, droughts or rains will be generated during the simulation, which will affect the state of the ecosystem and population dynamics. \n" +
-                "The simulation will reflect food relationships, animal migrations and interactions between species. \n" +
+                "In the simulation, you can add different types of plants and animals, change their location, and change weather conditions. \n" +
+                "Plants and animals appear on the board with an initial level of health, energy, or other indicator of 100%. Also, at the beginning of the simulation, the level of water and light is 100% \n" +
+                "When the feature level reaches zero, it means the end of the simulation." +
+                "Different weather conditions affect the state of plants and animals, as well as the state of the environment. \n" +
+                "For example, rainy weather increases the water level, which is important for plant hydration.\n" +
+                "During the simulation, different animals and plants can interact with each other, which affects their energy and health. \n" +
                 "For each stage of the simulation, data will be collected on the population sizes of the different species and on the state of the environment.’ + ‘At the end of the simulation, data will be collected. \n" +
                 "At the end of the simulation these data will be saved as a CSV file for further analysis. \n");
 
