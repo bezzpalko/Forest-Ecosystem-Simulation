@@ -1,7 +1,7 @@
 package ecosystem;
 
 import ecosystem.Animal;
-import ecosystem.Bird;
+
 
 class Deer extends Animal {
     private boolean hasAntlers;
