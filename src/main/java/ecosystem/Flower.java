@@ -20,33 +20,49 @@ public class Flower extends Plant {
     // response to weather conditions
     @Override
     public void reactToEvent(String event) {
+        int healthChange = 0;
+        int hydrationChange = 0;
+
         if (event.contains("Drought")) {
-            setHealth(getHealth() - 10);
-            setHydration(getHydration() - 20);
+            healthChange = -15;
+            hydrationChange = -20;
         } else if (event.contains("Rain")) {
-            setHealth(getHealth() + 10);
-            setHydration(getHydration() + 20);
+            healthChange = +10;
+            hydrationChange = +15;
         } else if (event.contains("Storm")) {
-            setHealth(getHealth() - 20);
+            healthChange = -10;
+            hydrationChange = +5;
         }
+        updateHealthAndHydration(healthChange, hydrationChange);
+        reactToEventMessage(event, healthChange, hydrationChange);
     }
 
     // interaction with other plants
     @Override
     public void interactWithPlant(Plant other) {
-        if (this.getPosition().getX() == other.getPosition().getX() &&
-                this.getPosition().getY() == other.getPosition().getY()) {
-            other.setHealth(other.getHealth() - 5); // Example of interaction: Flower is blooming, which may attract insects
+        int hydrationChange = 0;
+        if (other instanceof Tree) {
+            hydrationChange = -10;
+        } else if (other instanceof Bush) {
+            hydrationChange = -5;
         }
+        setHydration(getHydration() + hydrationChange);
+        interactWithPlantMessage(other, hydrationChange);
     }
 
     // interaction with animals
     @Override
-    public void interactWithAnimal(Animal animal) {
-        if (animal instanceof Bird) {
-            this.setHealth(this.getHealth() + 5); // Example of interaction: A bird pollinates a flower, increasing its health
-            animal.setEnergy(animal.getEnergy() + 5); // The bird gains energy
+    public void interactWithAnimal(Animal other) {
+        int healthChange = 0;
+        if (other instanceof Wolf) {
+            healthChange = 0;
+        } else if (other instanceof Deer) {
+            healthChange = -10;
+        } else if (other instanceof Bird) {
+            healthChange = -5;
         }
+        setHealth(getHealth() + healthChange);
+        interactWithAnimalMessage(other, healthChange);
     }
 
     // moving
