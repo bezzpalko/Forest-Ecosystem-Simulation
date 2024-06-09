@@ -54,10 +54,16 @@ abstract class Animal {
                 + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
     }
 
-    //Method to display messages after interaction with animal
-    protected void interactMessage(Animal other, int energyChange) {
+    //Method to display messages after interaction with other animal
+    protected void interactWithAnimalMessage(Animal other, int energyChange) {
         System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
                 + ". Energy changed by " + energyChange);
+    }
+
+    //Method to display messages after interaction with plant
+    protected void interactWithPlantMessage(Plant other, int hydrationChange) {
+        System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
+                + ". Hydration changed by " + hydrationChange);
     }
 
     // Abstract methods
@@ -65,5 +71,7 @@ abstract class Animal {
 
     public abstract void reactToEvent(String event);
 
-    public abstract void interact(Animal other);
+    public abstract void interactWithPlant(Plant other); // interaction with other plants
+
+    public abstract void interactWithAnimal(Animal animal); // interaction with animals
 }

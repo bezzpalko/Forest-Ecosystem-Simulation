@@ -53,7 +53,7 @@ class Deer extends Animal {
     }
 
     @Override
-    public void interact(Animal other) {
+    public void interactWithAnimal(Animal other) {
         int energyChange = 0;
         if (other instanceof Wolf) {
             energyChange = -10;
@@ -61,6 +61,21 @@ class Deer extends Animal {
             energyChange = -5;
         }
         setEnergy(getEnergy() + energyChange);
-        interactMessage(other, energyChange);
+        interactWithAnimalMessage(other, energyChange);
+    }
+
+    // interaction with other plants
+    @Override
+    public void interactWithPlant(Plant other) {
+        int healthChange = 0;
+        if (other instanceof Tree) {
+            healthChange = +5;
+        } else if (other instanceof Bush) {
+            healthChange = +10;
+        } else if (other instanceof Flower) {
+            healthChange = +5;
+        }
+        setHealth(getHealth() + healthChange);
+        interactWithPlantMessage(other, healthChange);
     }
 }
