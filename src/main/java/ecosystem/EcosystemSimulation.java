@@ -4,18 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-//import java.util.Observer;
-import java.util.Random;
 import java.util.Scanner;
-public class EcosystemSimulation extends Observable {
+public class EcosystemSimulation {
     final int width;
     final int height;
     private List<Animal> animals;
     private List<Plant> plants;
-    final Environment environment; //na final
+    final Environment environment;
     private List<String> weatherEvents;
-//    private Random random; //nieużywane
     private Scanner scanner;
 
 
@@ -26,20 +22,15 @@ public class EcosystemSimulation extends Observable {
         this.animals = new ArrayList<>();
         this.plants = new ArrayList<>();
         this.weatherEvents = new ArrayList<>();
-//        this.random = new Random(); //nieużywane
         this.scanner = new Scanner(System.in);
     }
 
     public void addAnimal(Animal animal) {
         animals.add(animal);
-        setChanged(); // Notify observers only if there's a change
-        notifyObservers("animalAdded" + animal);
     }
 
     public void removeAnimal(Animal animal) {
         animals.remove(animal);
-        setChanged();
-        notifyObservers("animalRemoved" + animal);
     }
     public void checkAndRemoveDeadAnimals() {
         List<Animal> animalsToRemove = new ArrayList<>();
@@ -55,14 +46,10 @@ public class EcosystemSimulation extends Observable {
 
     public void addPlant(Plant plant) {
         plants.add(plant);
-        setChanged();
-        notifyObservers("plantAdded" + plant);
     }
 
     public void removePlant(Plant plant) {
         plants.remove(plant);
-        setChanged();
-        notifyObservers("plantRemoved" + plant);
     }
 
     public List<Animal> getAnimals() {
@@ -77,25 +64,19 @@ public class EcosystemSimulation extends Observable {
         return environment;
     }
 
-    public void simulate() { // update, generate events, set changes
+    public void simulate() { //update, generate events, set changes
         updateStates();
         generateEvents();
         checkAndRemoveDeadAnimals();
-        setChanged();
-        notifyObservers("Simulation step completed.");
     }
 
     private void updateStates() {
         for (Animal animal : animals) {
             animal.move();
-            setChanged();
-            notifyObservers("animalMoved" + animal);
         }
 
         for (Plant plant : plants) {
             plant.move();
-            setChanged();
-            notifyObservers("plantMoved" + plant);
         }
     }
 
@@ -105,7 +86,7 @@ public class EcosystemSimulation extends Observable {
         System.out.println("2. Rain");
         System.out.println("3. Storm");
         int eventType = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         WeatherEvent event;
         switch (eventType) {
@@ -120,7 +101,7 @@ public class EcosystemSimulation extends Observable {
                 break;
             default:
                 System.out.println("Incorrect selection, please select number 1 to 3.");
-                return; // Termination of the method if an invalid option is selected
+                return; //termination of the method if an invalid option is selected
         }
 
         applyEventToEnvironment(event);
@@ -128,7 +109,6 @@ public class EcosystemSimulation extends Observable {
 
     public void applyEventToEnvironment(WeatherEvent event) { //giving the event back to the environment
         event.apply(environment);
-
 
         String eventDetails = "Event: " + event.getClass().getSimpleName() + " {";
         if (event instanceof Drought) {
@@ -144,12 +124,10 @@ public class EcosystemSimulation extends Observable {
 
         for (Animal animal : animals) {
             animal.reactToEvent(event.toString());
-            notifyObservers("Animal reacted: " + animal);
         }
 
         for (Plant plant : plants) {
             plant.reactToEvent(event.toString());
-            notifyObservers("Animal reacted: " + plant);
         }
     }
 
@@ -160,7 +138,7 @@ public class EcosystemSimulation extends Observable {
             System.out.println("No animals.");
         } else {
             for (Animal animal : animals) {
-                // Downloading animal information and formatting the output
+                //downloading animal information and formatting the output
                 System.out.println(animal.getClass().getSimpleName() +
                         " at " + animal.getPosition().getX() + ", " + animal.getPosition().getY() +
                         "\n Health: " + animal.getHealth() +
@@ -173,7 +151,7 @@ public class EcosystemSimulation extends Observable {
             System.out.println("No plants.");
         } else {
             for (Plant plant : plants) {
-                // Downloading plant information and formatting the output
+                //downloading plant information and formatting the output
                 System.out.println(plant.getClass().getSimpleName() +
                         " at " + plant.getPosition().getX() + ", " + plant.getPosition().getY() +
                         "\n Health: " + plant.getHealth() +
@@ -265,7 +243,7 @@ public class EcosystemSimulation extends Observable {
         }
     }
     public static void main(String[] args) {
-        System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 50 x 50.\n" +
+        System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 20 x 20.\n" +
                 "At the start of the simulation, plant species will be distributed, with levels of water and light needs. In addition, scattered animals such as wolves, deer and birds appear on the board. \n" +
                 "Each of these organisms will have certain characteristics, such as growth rate, ability to move and food preferences. \n" +
                 "Random events such as forest fires, droughts or rains will be generated during the simulation, which will affect the state of the ecosystem and population dynamics. \n" +
@@ -273,25 +251,7 @@ public class EcosystemSimulation extends Observable {
                 "For each stage of the simulation, data will be collected on the population sizes of the different species and on the state of the environment.’ + ‘At the end of the simulation, data will be collected. \n" +
                 "At the end of the simulation these data will be saved as a CSV file for further analysis. \n");
 
-        EcosystemSimulation simulation = new EcosystemSimulation(50, 50); // example initial values of width amd height
-
-        // Dodawanie obserwatora
-//        Observer consoleObserver = new ConsoleObserver();
-//        simulation.addObserver(consoleObserver);
-//
-//        simulation.addAnimal(new Wolf(100, 100, new Point(0, 0), "carnivore"));
-//        simulation.addAnimal(new Deer(100, 100, new Point(10, 10), "herbivore"));
-//        simulation.addAnimal(new Bird(100, 100, new Point(20, 20), "omnivore"));
-//
-//        simulation.addPlant(new Tree(90, 30, "rest", new Point(5, 15), 50));
-//        simulation.addPlant(new Bush(90, 40, "growth", new Point(10, 25), 5));
-//        simulation.addPlant(new Flower(90, 50, "blooming", new Point(12, 30), true));
-//
-//        simulation.simulate();
-//
-//        simulation.printPopulation();
-//
-//        simulation.saveSimulationDataToCSV("simulation_data.csv");
+        EcosystemSimulation simulation = new EcosystemSimulation(20, 20); // example initial values of width amd height
         Menu menu = new Menu(simulation);
         menu.displayMenu();
     }

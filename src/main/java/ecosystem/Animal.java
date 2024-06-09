@@ -1,7 +1,6 @@
 package ecosystem;
 
 abstract class Animal {
-
     private int energy;
     private int health;
     private Point position;
@@ -42,31 +41,27 @@ abstract class Animal {
         this.diet = diet;
     }
 
-    // Method to update health and energy
-    protected void updateHealthAndEnergy(int healthChange, int energyChange) {
+    protected void updateHealthAndEnergy(int healthChange, int energyChange) { //method to update health and energy
         setHealth(getHealth() + healthChange);
         setEnergy(getEnergy() + energyChange);
     }
 
-    //Method to display messages after the event response
-    protected void reactToEventMessage(String event, int healthChange, int energyChange) {
+    protected void reactToEventMessage(String event, int healthChange, int energyChange) { //method to display messages after the event response
         System.out.println(getClass().getSimpleName() + " reacted to " + event
                 + ". Health changed by " + healthChange + ", Energy changed by " + energyChange);
     }
 
-    //Method to display messages after interaction with other animal
-    protected void interactWithAnimalMessage(Animal other, int energyChange) {
+    protected void interactWithAnimalMessage(Animal other, int energyChange) { //method to display messages after interaction with other animal
         System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
                 + ". Energy changed by " + energyChange);
     }
 
-    //Method to display messages after interaction with plant
-    protected void interactWithPlantMessage(Plant other, int hydrationChange) {
+    protected void interactWithPlantMessage(Plant other, int hydrationChange) { //method to display messages after interaction with plant
         System.out.println(getClass().getSimpleName() + " interacted with " + other.getClass().getSimpleName()
                 + ". Hydration changed by " + hydrationChange);
     }
 
-    // Abstract methods
+    //abstract methods
     public abstract void move();
 
     public abstract void reactToEvent(String event);

@@ -18,21 +18,22 @@ class Bird extends Animal {
         this.wingspan = wingspan;
     }
 
+    //moving
     @Override
     public void move() {
-        getPosition().translate(1, 1);  // Birds move 1 units
-        // Ensure x and y are within the bounds of 0 to 50
+        getPosition().translate(1, 1);  //moving 1 unit
+        //ensure x and y are within the bounds of 0 to 20
         Point position = getPosition();
-        if (position.getX() > 50) {
+        if (position.getX() > 20) {
             position.setX(0);
         }
-        if (position.getY() > 50) {
+        if (position.getY() > 20) {
             position.setY(0);
         }
     }
 
     @Override
-    public void reactToEvent(String event) {
+    public void reactToEvent(String event) { //the impact of weather events on the animal's parameters
         int healthChange = 0;
         int energyChange = 0;
 
@@ -45,11 +46,11 @@ class Bird extends Animal {
         } else if (event.contains("Storm")) {
             healthChange = -5;
         }
-
         updateHealthAndEnergy(healthChange, energyChange);
         reactToEventMessage(event, healthChange, energyChange);
     }
 
+    //interaction with other animals
     @Override
     public void interactWithAnimal(Animal other) {
         int energyChange = 0;
@@ -67,11 +68,11 @@ class Bird extends Animal {
     public void interactWithPlant(Plant other) {
         int healthChange = 0;
         if (other instanceof Tree) {
-            healthChange = +1;
+            healthChange = 1;
         } else if (other instanceof Bush) {
-            healthChange = +5;
+            healthChange = 5;
         } else if (other instanceof Flower) {
-            healthChange = +5;
+            healthChange = 5;
         }
         setHealth(getHealth() + healthChange);
         interactWithPlantMessage(other, healthChange);

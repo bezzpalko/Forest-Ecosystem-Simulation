@@ -9,6 +9,7 @@ class Point {
         this.y = y;
     }
 
+    //moving the object by the vector (dx, dy).
     public void translate(int dx, int dy) {
         this.x += dx;
         this.y += dy;

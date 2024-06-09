@@ -1,5 +1,4 @@
 package ecosystem;
-
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +16,7 @@ public class Menu {
         while (true) {
             printMenu();
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     addAnimal();
@@ -89,11 +88,11 @@ public class Menu {
         System.out.println("2. Deer");
         System.out.println("3. Bird");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         Random random = new Random();
-        int x = random.nextInt(50); //wylosowanie położenia początkowego zwierzęcia na planszy o wymiarach 50x50
-        int y = random.nextInt(50);
+        int x = random.nextInt(20); //drawing the starting position of the animal
+        int y = random.nextInt(20);
 
         Animal animal;
         switch (choice) {
@@ -122,7 +121,7 @@ public class Menu {
     private void removeAnimal() {
         System.out.print("Enter the animal's index:");
         int index = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         List<Animal> animalList = simulation.getAnimals();
 
@@ -141,11 +140,11 @@ public class Menu {
         System.out.println("2. Bush");
         System.out.println("3. Flower");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         Random random = new Random();
-        int x = random.nextInt(50);
-        int y = random.nextInt(50);
+        int x = random.nextInt(20); //drawing the starting position of the plant
+        int y = random.nextInt(20);
 
         Plant plant;
         switch (choice) {
@@ -175,7 +174,7 @@ public class Menu {
     private void removePlant() {
         System.out.print("Give the index of the plant: ");
         int index = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         List<Plant> plantList = simulation.getPlants();
 

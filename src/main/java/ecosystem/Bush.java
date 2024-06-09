@@ -69,12 +69,12 @@ public class Bush extends Plant {
     @Override
     public void move() {
         getPosition().translate(0, 10);
-        // Make sure that x and y are between 0 and 50
+        // Make sure that x and y are between 0 and 20
         Point position = getPosition();
-        if (position.getX() > 50) {
+        if (position.getX() > 20) {
             position.setX(0);
         }
-        if (position.getY() > 50) {
+        if (position.getY() > 20) {
             position.setY(0);
         }
     }

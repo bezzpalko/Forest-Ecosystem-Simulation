@@ -21,22 +21,22 @@ class Wolf extends Animal {
         isPackLeader = packLeader;
     }
 
+    //moving
     @Override
     public void move() {
-        getPosition().translate(2, 2);
-
-        // Ensure x and y are within the bounds of 0 to 50
+        getPosition().translate(2, 2); //moving 2 units
+        //ensure x and y are within the bounds of 0 to 20
         Point position = getPosition();
-        if (position.getX() > 50) {
+        if (position.getX() > 20) {
             position.setX(0);
         }
-        if (position.getY() > 50) {
+        if (position.getY() > 20) {
             position.setY(0);
         }
     }
 
     @Override
-    public void reactToEvent(String event) {
+    public void reactToEvent(String event) { //the impact of weather events on the animal's parameters
         int healthChange = 0;
         int energyChange = 0;
 
@@ -53,6 +53,7 @@ class Wolf extends Animal {
         reactToEventMessage(event, healthChange, energyChange);
     }
 
+    //interaction with other animals
     @Override
     public void interactWithAnimal(Animal other) {
         int energyChange = 0;
@@ -72,9 +73,9 @@ class Wolf extends Animal {
         if (other instanceof Tree) {
             healthChange = 0;
         } else if (other instanceof Bush) {
-            healthChange = +5;
+            healthChange = 5;
         } else if (other instanceof Flower) {
-            healthChange = +1;
+            healthChange = 1;
         }
         setHealth(getHealth() + healthChange);
         interactWithPlantMessage(other, healthChange);

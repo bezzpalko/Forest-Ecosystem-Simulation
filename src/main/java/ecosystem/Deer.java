@@ -19,22 +19,22 @@ class Deer extends Animal {
         this.hasAntlers = hasAntlers;
     }
 
+    //moving
     @Override
     public void move() {
-        getPosition().translate(4, 4);  // ecosystem.Deer move 4 units
-
-        // Ensure x and y are within the bounds of 0 to 50
+        getPosition().translate(4, 4);  //moving 4 units
+        // Ensure x and y are within the bounds of 0 to 20
         Point position = getPosition();
-        if (position.getX() > 50) {
+        if (position.getX() > 20) {
             position.setX(0);
         }
-        if (position.getY() > 50) {
+        if (position.getY() > 20) {
             position.setY(0);
         }
     }
 
     @Override
-    public void reactToEvent(String event) {
+    public void reactToEvent(String event) { //the impact of weather events on the animal's parameters
         int healthChange = 0;
         int energyChange = 0;
 
@@ -47,11 +47,11 @@ class Deer extends Animal {
         } else if (event.contains("Storm")) {
             healthChange = -5;
         }
-
         updateHealthAndEnergy(healthChange, energyChange);
         reactToEventMessage(event, healthChange, energyChange);
     }
 
+    //interaction with other animals
     @Override
     public void interactWithAnimal(Animal other) {
         int energyChange = 0;
@@ -64,16 +64,16 @@ class Deer extends Animal {
         interactWithAnimalMessage(other, energyChange);
     }
 
-    // interaction with other plants
+    //interaction with other plants
     @Override
     public void interactWithPlant(Plant other) {
         int healthChange = 0;
         if (other instanceof Tree) {
-            healthChange = +5;
+            healthChange = 5;
         } else if (other instanceof Bush) {
-            healthChange = +10;
+            healthChange = 10;
         } else if (other instanceof Flower) {
-            healthChange = +5;
+            healthChange = 5;
         }
         setHealth(getHealth() + healthChange);
         interactWithPlantMessage(other, healthChange);

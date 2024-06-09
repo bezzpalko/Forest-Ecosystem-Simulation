@@ -1,7 +1,4 @@
-package ecosystem;//
-
-import ecosystem.Environment;
-
+package ecosystem;
 import java.util.Random;
 
 public class Rain implements WeatherEvent {

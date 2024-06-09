@@ -20,7 +20,7 @@ public class EcosystemSimulationTest {
 
     @BeforeEach
     public void setUp() {
-        simulation = new EcosystemSimulation(100, 100);
+        simulation = new EcosystemSimulation(20, 20);
         wolf = new Wolf(100, 100, new Point(0, 0), "carnivorous");
         deer = new Deer(100, 100, new Point(10, 10), "herbivorous");
         bird = new Bird(100, 100, new Point(20, 20), "omnivorous");
@@ -29,7 +29,7 @@ public class EcosystemSimulationTest {
         simulation.addAnimal(bird);
         tree = new Tree(100, 100, "growth", new Point(5, 5));
         bush = new Bush(80, 80, "growth", new Point(15, 15));
-        flower = new Flower(90, 90, "blooming", new Point(25, 25));
+        flower = new Flower(90, 90, "blooming", new Point(3, 5));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class EcosystemSimulationTest {
 
     @Test
     public void testAddPlant() {
-        Tree newTree = new Tree(90, 90, "rest", new Point(30, 30));
+        Tree newTree = new Tree(90, 90, "rest", new Point(10, 20));
         simulation.addPlant(newTree);
         assertTrue(simulation.getPlants().contains(newTree), "Tree should be added to the simulation.");
     }
