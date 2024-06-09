@@ -15,18 +15,18 @@ public class EcosystemSimulation extends Observable {
     private List<Plant> plants;
     final Environment environment; //na final
     private List<String> weatherEvents;
-    private Random random;
+//    private Random random; //nieużywane
     private Scanner scanner;
 
 
     public EcosystemSimulation(int width, int height) {
         this.width = width;
         this.height = height;
-        this.environment = new Environment(100, 100); // example initial values
+        this.environment = new Environment(100, 100); // example initial values of waterLevel and lightLevel
         this.animals = new ArrayList<>();
         this.plants = new ArrayList<>();
         this.weatherEvents = new ArrayList<>();
-        this.random = new Random();
+//        this.random = new Random(); //nieużywane
         this.scanner = new Scanner(System.in);
     }
 
@@ -273,7 +273,7 @@ public class EcosystemSimulation extends Observable {
                 "For each stage of the simulation, data will be collected on the population sizes of the different species and on the state of the environment.’ + ‘At the end of the simulation, data will be collected. \n" +
                 "At the end of the simulation these data will be saved as a CSV file for further analysis. \n");
 
-        EcosystemSimulation simulation = new EcosystemSimulation(50, 50);
+        EcosystemSimulation simulation = new EcosystemSimulation(50, 50); // example initial values of width amd height
 
         // Dodawanie obserwatora
 //        Observer consoleObserver = new ConsoleObserver();

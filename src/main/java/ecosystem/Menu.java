@@ -92,7 +92,7 @@ public class Menu {
         scanner.nextLine(); // consume newline
 
         Random random = new Random();
-        int x = random.nextInt(50);
+        int x = random.nextInt(50); //wylosowanie położenia początkowego zwierzęcia na planszy o wymiarach 50x50
         int y = random.nextInt(50);
 
         Animal animal;

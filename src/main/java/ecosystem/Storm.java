@@ -1,4 +1,4 @@
-package ecosystem;//import java.util.Random;
+package ecosystem;
 
 import ecosystem.Environment;
 
@@ -10,7 +10,7 @@ public class Storm implements WeatherEvent {
 
     public Storm() {
         this.power = random.nextInt(10) + 1;
-    }
+    } //wylosowanie siły zdarzenia pogodowego
 
     @Override
     public void apply(Environment environment) {
