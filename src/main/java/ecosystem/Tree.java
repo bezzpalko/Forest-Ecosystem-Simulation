@@ -2,22 +2,48 @@ package ecosystem;
 
 import ecosystem.Plant;
 
+/**
+ * Represents a Tree in the ecosystem.
+ */
 class Tree extends Plant {
     private int height; // tree height
 
+    /**
+     * Constructs a Tree with specified health, hydration, growth stage, and position.
+     *
+     * @param health the health of the tree
+     * @param hydration the hydration level of the tree
+     * @param growthStage the growth stage of the tree
+     * @param position the position of the tree
+     */
     public Tree(int health, int hydration, String growthStage, Point position) {
         super(health, hydration, growthStage, position);
         this.height = 30;
     }
 
+    /**
+     * Gets the height of the tree.
+     *
+     * @return the height of the tree
+     */
     public int getHeight() {
         return height;
     }
+
+    /**
+     * Sets the height of the tree.
+     *
+     * @param height the new height of the tree
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
-    // response to weather conditions
+    /**
+     * Reacts to weather conditions by changing the tree's health and hydration.
+     *
+     * @param event the weather event to react to
+     */
     @Override
     public void reactToEvent(String event) {
         int healthChange = 0;
@@ -37,7 +63,11 @@ class Tree extends Plant {
         reactToEventMessage(event, healthChange, hydrationChange);
     }
 
-    // interaction with other plants
+    /**
+     * Interacts with another plant, potentially changing the tree's hydration.
+     *
+     * @param other the plant to interact with
+     */
     @Override
     public void interactWithPlant(Plant other) {
         int hydrationChange = 0;
@@ -50,7 +80,11 @@ class Tree extends Plant {
         interactWithPlantMessage(other, hydrationChange);
     }
 
-    // interaction with animals
+    /**
+     * Interacts with an animal, potentially changing the tree's health.
+     *
+     * @param other the animal to interact with
+     */
     @Override
     public void interactWithAnimal(Animal other) {
         int healthChange = 0;
@@ -65,7 +99,10 @@ class Tree extends Plant {
         interactWithAnimalMessage(other, healthChange);
     }
 
-    //moving
+    /**
+     * Moves the tree by updating its position.
+     * Ensures the tree's position stays within the bounds of 0 to 20.
+     */
     @Override
     public void move() {
         getPosition().translate(10, 5);

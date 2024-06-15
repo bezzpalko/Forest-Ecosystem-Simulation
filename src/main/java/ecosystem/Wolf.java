@@ -1,27 +1,52 @@
 package ecosystem;
+
 import ecosystem.Animal;
 
+/**
+ * Represents a Wolf in the ecosystem.
+ */
 class Wolf extends Animal {
-    private boolean isPackLeader;
+    private boolean isPackLeader; // indicates if the wolf is the pack leader
 
+    /**
+     * Constructs a Wolf with specified energy, health, position, and diet.
+     *
+     * @param energy the energy level of the wolf
+     * @param health the health of the wolf
+     * @param position the position of the wolf
+     * @param diet the diet of the wolf
+     */
     public Wolf(int energy, int health, Point position, String diet) {
         super(energy, health, position, diet);
         this.isPackLeader = false;
     }
 
+    /**
+     * Checks if the wolf is the pack leader.
+     *
+     * @return true if the wolf is the pack leader, false otherwise
+     */
     public boolean isPackLeader() {
         return isPackLeader;
     }
 
+    /**
+     * Sets whether the wolf is the pack leader.
+     *
+     * @param packLeader true if the wolf should be the pack leader, false otherwise
+     */
     public void setPackLeader(boolean packLeader) {
         isPackLeader = packLeader;
     }
 
-    //moving
+    /**
+     * Moves the wolf by updating its position.
+     * Ensures the wolf's position stays within the bounds of 0 to 20.
+     */
     @Override
     public void move() {
-        getPosition().translate(2, 2); //moving 2 units
-        //ensure x and y are within the bounds of 0 to 20
+        getPosition().translate(2, 2); // moving 2 units
+        // ensure x and y are within the bounds of 0 to 20
         Point position = getPosition();
         if (position.getX() > 20) {
             position.setX(0);
@@ -31,8 +56,13 @@ class Wolf extends Animal {
         }
     }
 
+    /**
+     * Reacts to weather events by changing the wolf's health and energy.
+     *
+     * @param event the weather event to react to
+     */
     @Override
-    public void reactToEvent(String event) { //the impact of weather events on the animal's parameters
+    public void reactToEvent(String event) {
         int healthChange = 0;
         int energyChange = 0;
 
@@ -49,7 +79,11 @@ class Wolf extends Animal {
         reactToEventMessage(event, healthChange, energyChange);
     }
 
-    //interaction with other animals
+    /**
+     * Interacts with another animal, potentially changing the wolf's energy.
+     *
+     * @param other the animal to interact with
+     */
     @Override
     public void interactWithAnimal(Animal other) {
         int energyChange = 0;
@@ -62,7 +96,11 @@ class Wolf extends Animal {
         interactWithAnimalMessage(other, energyChange);
     }
 
-    // interaction with other plants
+    /**
+     * Interacts with a plant, potentially changing the wolf's health.
+     *
+     * @param other the plant to interact with
+     */
     @Override
     public void interactWithPlant(Plant other) {
         int healthChange = 0;

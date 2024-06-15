@@ -1,17 +1,29 @@
 package ecosystem;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.Random;
-public class Menu {
-    final EcosystemSimulation simulation;
-    final Scanner scanner;
 
+/**
+ * Represents the menu for the ecosystem simulation, allowing user interaction to control the simulation.
+ */
+public class Menu {
+    final EcosystemSimulation simulation; // the ecosystem simulation
+    final Scanner scanner; // scanner for user input
+
+    /**
+     * Constructs a Menu with the specified simulation.
+     *
+     * @param simulation the ecosystem simulation to control
+     */
     public Menu(EcosystemSimulation simulation) {
         this.simulation = simulation;
         this.scanner = new Scanner(System.in);
-
     }
 
+    /**
+     * Displays the menu and handles user input.
+     */
     public void displayMenu() {
         while (true) {
             printMenu();
@@ -69,6 +81,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Prints the menu options.
+     */
     private void printMenu() {
         System.out.println("\n--- The menu ---");
         System.out.println("1. Add animal");
@@ -87,7 +102,9 @@ public class Menu {
         System.out.print("Select options:");
     }
 
-
+    /**
+     * Adds an animal to the simulation based on user input.
+     */
     private void addAnimal() {
         System.out.println("Select animal type:");
         System.out.println("1. Wolf");
@@ -97,7 +114,7 @@ public class Menu {
         scanner.nextLine();
 
         Random random = new Random();
-        int x = random.nextInt(20); //drawing the starting position of the animal
+        int x = random.nextInt(20); // drawing the starting position of the animal
         int y = random.nextInt(20);
 
         Animal animal;
@@ -117,6 +134,10 @@ public class Menu {
         }
         simulation.addAnimal(animal);
     }
+
+    /**
+     * Moves all animals in the simulation.
+     */
     private void moveAnimals() {
         for (Animal animal : simulation.getAnimals()) {
             animal.move();
@@ -124,6 +145,9 @@ public class Menu {
         System.out.println("The animals made an additional move.");
     }
 
+    /**
+     * Removes an animal from the simulation based on user input.
+     */
     private void removeAnimal() {
         System.out.print("Enter the animal's index:");
         int index = scanner.nextInt();
@@ -140,6 +164,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Adds a plant to the simulation based on user input.
+     */
     private void addPlant() {
         System.out.println("Select the type of plant:");
         System.out.println("1. Tree");
@@ -149,7 +176,7 @@ public class Menu {
         scanner.nextLine();
 
         Random random = new Random();
-        int x = random.nextInt(20); //drawing the starting position of the plant
+        int x = random.nextInt(20); // drawing the starting position of the plant
         int y = random.nextInt(20);
 
         Plant plant;
@@ -170,6 +197,9 @@ public class Menu {
         simulation.addPlant(plant);
     }
 
+    /**
+     * Moves all plants in the simulation.
+     */
     private void movePlants() {
         for (Plant plant : simulation.getPlants()) {
             plant.move();
@@ -177,6 +207,9 @@ public class Menu {
         System.out.println("The plants have been moved.");
     }
 
+    /**
+     * Removes a plant from the simulation based on user input.
+     */
     private void removePlant() {
         System.out.print("Give the index of the plant: ");
         int index = scanner.nextInt();
@@ -193,6 +226,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Saves the simulation data to a CSV file based on user input.
+     */
     private void saveSimulationDataToCSV() {
         System.out.print("Specify the name of the file to save the data: ");
         String filename = scanner.nextLine();

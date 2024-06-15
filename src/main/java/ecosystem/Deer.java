@@ -2,27 +2,50 @@ package ecosystem;
 
 import ecosystem.Animal;
 
-
+/**
+ * Represents a Deer in the ecosystem.
+ */
 class Deer extends Animal {
-    private boolean hasAntlers;
+    private boolean hasAntlers; // indicates if the deer has antlers
 
+    /**
+     * Constructs a Deer with specified energy, health, position, and diet.
+     *
+     * @param energy the energy level of the deer
+     * @param health the health of the deer
+     * @param position the position of the deer
+     * @param diet the diet of the deer
+     */
     public Deer(int energy, int health, Point position, String diet) {
         super(energy, health, position, diet);
         this.hasAntlers = true;
     }
 
+    /**
+     * Checks if the deer has antlers.
+     *
+     * @return true if the deer has antlers, false otherwise
+     */
     public boolean hasAntlers() {
         return hasAntlers;
     }
 
+    /**
+     * Sets whether the deer has antlers.
+     *
+     * @param hasAntlers true if the deer has antlers, false otherwise
+     */
     public void setHasAntlers(boolean hasAntlers) {
         this.hasAntlers = hasAntlers;
     }
 
-    //moving
+    /**
+     * Moves the deer by updating its position.
+     * Ensures the deer's position stays within the bounds of 0 to 20.
+     */
     @Override
     public void move() {
-        getPosition().translate(4, 4);  //moving 4 units
+        getPosition().translate(4, 4); // moving 4 units
         // Ensure x and y are within the bounds of 0 to 20
         Point position = getPosition();
         if (position.getX() > 20) {
@@ -33,8 +56,13 @@ class Deer extends Animal {
         }
     }
 
+    /**
+     * Reacts to weather events by changing the deer's health and energy.
+     *
+     * @param event the weather event to react to
+     */
     @Override
-    public void reactToEvent(String event) { //the impact of weather events on the animal's parameters
+    public void reactToEvent(String event) {
         int healthChange = 0;
         int energyChange = 0;
 
@@ -51,7 +79,11 @@ class Deer extends Animal {
         reactToEventMessage(event, healthChange, energyChange);
     }
 
-    //interaction with other animals
+    /**
+     * Interacts with another animal, potentially changing the deer's energy.
+     *
+     * @param other the animal to interact with
+     */
     @Override
     public void interactWithAnimal(Animal other) {
         int energyChange = 0;
@@ -64,7 +96,11 @@ class Deer extends Animal {
         interactWithAnimalMessage(other, energyChange);
     }
 
-    //interaction with other plants
+    /**
+     * Interacts with a plant, potentially changing the deer's health.
+     *
+     * @param other the plant to interact with
+     */
     @Override
     public void interactWithPlant(Plant other) {
         int healthChange = 0;

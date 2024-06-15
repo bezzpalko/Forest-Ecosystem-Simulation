@@ -5,16 +5,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * Represents the simulation of a forest ecosystem, including different species of plants and animals interacting with each other.
+ */
 public class EcosystemSimulation {
-    final int width;
-    final int height;
-    private List<Animal> animals;
-    private List<Plant> plants;
-    final Environment environment;
-    private List<String> weatherEvents;
-    private Scanner scanner;
+    final int width; // width of the ecosystem
+    final int height; // height of the ecosystem
+    private List<Animal> animals; // list of animals in the ecosystem
+    private List<Plant> plants; // list of plants in the ecosystem
+    final Environment environment; // the environment of the ecosystem
+    private List<String> weatherEvents; // list of weather events that occurred
+    private Scanner scanner; // scanner for user input
 
-
+    /**
+     * Constructs an EcosystemSimulation with specified width and height.
+     *
+     * @param width the width of the ecosystem
+     * @param height the height of the ecosystem
+     */
     public EcosystemSimulation(int width, int height) {
         this.width = width;
         this.height = height;
@@ -25,13 +34,27 @@ public class EcosystemSimulation {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Adds an animal to the ecosystem.
+     *
+     * @param animal the animal to add
+     */
     public void addAnimal(Animal animal) {
         animals.add(animal);
     }
 
+    /**
+     * Removes an animal from the ecosystem.
+     *
+     * @param animal the animal to remove
+     */
     public void removeAnimal(Animal animal) {
         animals.remove(animal);
     }
+
+    /**
+     * Checks and removes dead animals from the ecosystem.
+     */
     public void checkAndRemoveDeadAnimals() {
         List<Animal> animalsToRemove = new ArrayList<>();
         for (Animal animal : animals) {
@@ -44,6 +67,9 @@ public class EcosystemSimulation {
         }
     }
 
+    /**
+     * Checks and removes dead plants from the ecosystem.
+     */
     public void checkAndRemoveDeadPlants() {
         List<Plant> plantsToRemove = new ArrayList<>();
         for (Plant plant : plants) {
@@ -56,33 +82,64 @@ public class EcosystemSimulation {
         }
     }
 
+    /**
+     * Adds a plant to the ecosystem.
+     *
+     * @param plant the plant to add
+     */
     public void addPlant(Plant plant) {
         plants.add(plant);
     }
 
+    /**
+     * Removes a plant from the ecosystem.
+     *
+     * @param plant the plant to remove
+     */
     public void removePlant(Plant plant) {
         plants.remove(plant);
     }
 
+    /**
+     * Gets the list of animals in the ecosystem.
+     *
+     * @return the list of animals
+     */
     public List<Animal> getAnimals() {
         return animals;
     }
 
+    /**
+     * Gets the list of plants in the ecosystem.
+     *
+     * @return the list of plants
+     */
     public List<Plant> getPlants() {
         return plants;
     }
 
+    /**
+     * Gets the environment of the ecosystem.
+     *
+     * @return the environment
+     */
     public Environment getEnvironment() {
         return environment;
     }
 
-    public void simulate() { //update, generate events, set changes
+    /**
+     * Simulates the ecosystem by updating states, generating events, and checking/removing dead entities.
+     */
+    public void simulate() {
         updateStates();
         generateEvents();
         checkAndRemoveDeadAnimals();
         checkAndRemoveDeadPlants();
     }
 
+    /**
+     * Updates the states of animals and plants in the ecosystem.
+     */
     private void updateStates() {
         for (Animal animal : animals) {
             animal.move();
@@ -93,6 +150,9 @@ public class EcosystemSimulation {
         }
     }
 
+    /**
+     * Generates weather events and applies them to the environment.
+     */
     public void generateEvents() {
         System.out.println("Select the type of weather event to call:");
         System.out.println("1. Drought");
@@ -114,13 +174,18 @@ public class EcosystemSimulation {
                 break;
             default:
                 System.out.println("Incorrect selection, please select number 1 to 3.");
-                return; //termination of the method if an invalid option is selected
+                return; // termination of the method if an invalid option is selected
         }
 
         applyEventToEnvironment(event);
     }
 
-    public void applyEventToEnvironment(WeatherEvent event) { //giving the event back to the environment
+    /**
+     * Applies a weather event to the environment and updates the states of animals and plants accordingly.
+     *
+     * @param event the weather event to apply
+     */
+    public void applyEventToEnvironment(WeatherEvent event) {
         event.apply(environment);
 
         String eventDetails = "Event: " + event.getClass().getSimpleName() + " {";
@@ -134,7 +199,6 @@ public class EcosystemSimulation {
         eventDetails += '}';
         weatherEvents.add(eventDetails);
 
-
         for (Animal animal : animals) {
             animal.reactToEvent(event.toString());
         }
@@ -144,14 +208,16 @@ public class EcosystemSimulation {
         }
     }
 
-
+    /**
+     * Prints the population of animals and plants in the ecosystem.
+     */
     public void printPopulation() {
         System.out.println("Population:");
         if (animals.isEmpty()) {
             System.out.println("No animals.");
         } else {
             for (Animal animal : animals) {
-                //downloading animal information and formatting the output
+                // downloading animal information and formatting the output
                 System.out.println(animal.getClass().getSimpleName() +
                         " at " + animal.getPosition().getX() + ", " + animal.getPosition().getY() +
                         "\n Health: " + animal.getHealth() + "/100" +
@@ -164,7 +230,7 @@ public class EcosystemSimulation {
             System.out.println("No plants.");
         } else {
             for (Plant plant : plants) {
-                //downloading plant information and formatting the output
+                // downloading plant information and formatting the output
                 System.out.println(plant.getClass().getSimpleName() +
                         " at " + plant.getPosition().getX() + ", " + plant.getPosition().getY() +
                         "\n Health: " + plant.getHealth() + "/100" +
@@ -172,11 +238,19 @@ public class EcosystemSimulation {
             }
         }
     }
+
+    /**
+     * Prints the environmental data of the ecosystem.
+     */
     public void printEnvironmentData() {
         System.out.println("Environmental data:");
         System.out.println("Water level: " + environment.getWaterLevel());
         System.out.println("Light level: " + environment.getLightLevel());
     }
+
+    /**
+     * Prints the list of weather events that occurred in the ecosystem.
+     */
     public void printWeatherEvents() {
         if (weatherEvents.isEmpty()) {
             System.out.println("No recorded weather events.");
@@ -188,9 +262,14 @@ public class EcosystemSimulation {
         }
     }
 
+    /**
+     * Saves the simulation data to a CSV file.
+     *
+     * @param filename the name of the file to save the data to
+     */
     public void saveSimulationDataToCSV(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
-            writer.append("ecosystem.Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers\n");
+            writer.append("Animal,Energy,Health,Diet,Position,Wingspan/IsPackLeader/HasAntlers\n");
             for (Animal animal : animals) {
                 writer.append(animal.getClass().getSimpleName())
                         .append(',')
@@ -238,7 +317,6 @@ public class EcosystemSimulation {
                 writer.append('\n');
             }
 
-
             writer.append("Environment,WaterLevel,LightLevel\n");
             writer.append("Environment,")
                     .append(String.valueOf(environment.getWaterLevel()))
@@ -255,9 +333,19 @@ public class EcosystemSimulation {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Closes the scanner used for user input.
+     */
     public void close() {
         scanner.close();
     }
+
+    /**
+     * The main method to run the ecosystem simulation.
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         System.out.println("Simulation of a forest ecosystem: different species of plants and animals interacting with each other. The simulation will consist of an environment - a board with predefined dimensions: 20 x 20.\n" +
                 "In the simulation, you can add different types of plants and animals, change their location, and change weather conditions. \n" +
@@ -269,9 +357,8 @@ public class EcosystemSimulation {
                 "For each stage of the simulation, data will be collected on the population sizes of the different species and on the state of the environment.’ + ‘At the end of the simulation, data will be collected. \n" +
                 "At the end of the simulation these data will be saved as a CSV file for further analysis. \n");
 
-        EcosystemSimulation simulation = new EcosystemSimulation(20, 20); // example initial values of width amd height
+        EcosystemSimulation simulation = new EcosystemSimulation(20, 20); // example initial values of width and height
         Menu menu = new Menu(simulation);
         menu.displayMenu();
     }
 }
-

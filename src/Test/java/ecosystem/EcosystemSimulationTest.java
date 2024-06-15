@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+/**
+ * Test class for EcosystemSimulation.
+ */
 public class EcosystemSimulationTest {
     private EcosystemSimulation simulation;
     private Wolf wolf;
@@ -18,6 +21,9 @@ public class EcosystemSimulationTest {
     private Bush bush;
     private Flower flower;
 
+    /**
+     * Sets up the test environment before each test.
+     */
     @BeforeEach
     public void setUp() {
         simulation = new EcosystemSimulation(20, 20);
@@ -32,6 +38,9 @@ public class EcosystemSimulationTest {
         flower = new Flower(90, 90, "blooming", new Point(3, 5));
     }
 
+    /**
+     * Tests adding an animal to the simulation.
+     */
     @Test
     public void testAddAnimal() {
         Wolf newWolf = new Wolf(100, 100, new Point(5, 5), "carnivorous");
@@ -39,12 +48,18 @@ public class EcosystemSimulationTest {
         assertTrue(simulation.getAnimals().contains(newWolf), "Wolf should be added to the simulation.");
     }
 
+    /**
+     * Tests removing an animal from the simulation.
+     */
     @Test
     public void testRemoveAnimal() {
         simulation.removeAnimal(wolf);
         assertFalse(simulation.getAnimals().contains(wolf), "Wolf should be removed from the simulation.");
     }
 
+    /**
+     * Tests adding a plant to the simulation.
+     */
     @Test
     public void testAddPlant() {
         Tree newTree = new Tree(90, 90, "rest", new Point(10, 20));
@@ -52,12 +67,18 @@ public class EcosystemSimulationTest {
         assertTrue(simulation.getPlants().contains(newTree), "Tree should be added to the simulation.");
     }
 
+    /**
+     * Tests removing a plant from the simulation.
+     */
     @Test
     public void testRemovePlant() {
         simulation.removePlant(tree);
         assertFalse(simulation.getPlants().contains(tree), "Tree should be removed from the simulation.");
     }
 
+    /**
+     * Tests the reaction of a plant to a rain event.
+     */
     @Test
     public void testPlantReactToEvent() {
         Rain rain = new Rain();
@@ -66,6 +87,9 @@ public class EcosystemSimulationTest {
         assertTrue(tree.getHydration() > 100, "Tree's hydration should increase after rain.");
     }
 
+    /**
+     * Tests the reaction of a bush to a drought event.
+     */
     @Test
     public void testBushReactToEvent() {
         Drought drought = new Drought();
@@ -74,6 +98,9 @@ public class EcosystemSimulationTest {
         assertTrue(bush.getHydration() < 80, "Bush's hydration should decrease after drought.");
     }
 
+    /**
+     * Tests the reaction of a flower to a storm event.
+     */
     @Test
     public void testFlowerReactToEvent() {
         Storm storm = new Storm();
@@ -81,6 +108,9 @@ public class EcosystemSimulationTest {
         assertTrue(flower.getHealth() < 90, "Flower's health should decrease after storm.");
     }
 
+    /**
+     * Tests the simulation step to ensure animals move.
+     */
     @Test
     public void testSimulate() {
         simulation.simulate();
@@ -89,6 +119,9 @@ public class EcosystemSimulationTest {
         assertNotEquals(new Point(20, 20), bird.getPosition(), "Bird should have moved.");
     }
 
+    /**
+     * Tests saving the simulation data to a CSV file.
+     */
     @Test
     public void testSaveSimulationDataToCSV() {
         String filename = "test_simulation_data.csv";
