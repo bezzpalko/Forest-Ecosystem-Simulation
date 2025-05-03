@@ -39,7 +39,7 @@ Key features of the simulation:
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Programming Language: **Java**  
 - Documentation: **JavaDoc / Doxygen**  
