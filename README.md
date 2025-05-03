@@ -41,6 +41,5 @@ Key features of the simulation:
 
 ## Technologies Used
 
-- Programming Language: **Java**  
-- Documentation: **JavaDoc / Doxygen**  
+- Programming Language: **Java**   
 - Version Control: **Git & GitHub**
